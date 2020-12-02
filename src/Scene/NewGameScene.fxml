@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+   <children>
+      <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../MainMenuObjects/DashedFrame.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="worldMap_img" fitHeight="471.0" fitWidth="825.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../MainMenuObjects/WorldMap.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="hackLines_img" fitHeight="501.0" fitWidth="872.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../MainMenuObjects/HackLines.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="sound_img" fitHeight="30.0" fitWidth="33.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
+         <image>
+            <Image url="@../MainMenuObjects/voiceOn.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="header_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="360.0" style="-fx-background-color: white; -fx-opacity: 0.5;" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <Text fx:id="header_txt" fontSmoothingType="LCD" layoutX="22.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PING THE RISK">
+               <font>
+                  <Font name="Futura Bk BT Book" size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="menu_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="310.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="158.0">
+         <children>
+            <TextField fx:id="nickname_tf" layoutX="5.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="50.0" prefWidth="300.0" promptText="NICKNAME..." style="-fx-background-color: white;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Button fx:id="newGame_btn" layoutX="5.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newGameClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="NEW GAME">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="settings_btn" layoutX="5.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="SETTINGS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="credits_btn" layoutX="5.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#creditsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="CREDITS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="howToPlay_btn" layoutX="5.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#howToPlayClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="HOW TO PLAY">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="exit_btn" layoutX="5.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="EXIT">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
