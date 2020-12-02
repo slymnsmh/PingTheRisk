@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SceneController implements Initializable
+public class MainSceneController implements Initializable
 {
     @FXML ImageView sound_img;
     @FXML TextField nickname_tf;
@@ -31,32 +31,32 @@ public class SceneController implements Initializable
         }
         else
         {
-            Parent newGameMenuParent = FXMLLoader.load(getClass().getResource("Scene/NewGameScene.fxml"));
-            Scene newGameMenuScene = new Scene(newGameMenuParent);
-            Main.stage.setScene(newGameMenuScene);
-            Main.stage.show();
+            changeScene("Scene/NewGameScene.fxml");
         }
     }
 
     @FXML
     private void settingsClicked (ActionEvent e) throws Exception
     {
-
+        changeScene("Scene/SettingsScene.fxml");
     }
 
     @FXML
     private void creditsClicked (ActionEvent e) throws Exception
     {
+        changeScene("Scene/CreditsScene.fxml");
     }
 
     @FXML
     private void howToPlayClicked (ActionEvent e) throws Exception
     {
+        changeScene("Scene/HowToPlayScene.fxml");
     }
 
     @FXML
     private void exitClicked (ActionEvent e) throws Exception
     {
+        System.exit(0);
     }
 
     @FXML
@@ -83,8 +83,9 @@ public class SceneController implements Initializable
     {
     }
 
-    private void changeScene(String filePath) throws IOException {
-        Parent newGameMenuParent = FXMLLoader.load(getClass().getResource("Scene/NewGameScene.fxml"));
+    private void changeScene(String filePath) throws IOException
+    {
+        Parent newGameMenuParent = FXMLLoader.load(getClass().getResource(filePath));
         Scene newGameMenuScene = new Scene(newGameMenuParent);
         Main.stage.setScene(newGameMenuScene);
         Main.stage.show();
