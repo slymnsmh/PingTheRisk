@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +17,8 @@ import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable
 {
+    public ImageView background_img;
+    @FXML AnchorPane main_pane;
     @FXML ImageView sound_img;
     @FXML TextField nickname_tf;
     @FXML Button newGame_btn, settings_btn, credits_btn, howToPlay_btn, exit_btn;
