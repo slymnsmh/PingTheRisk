@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,6 +41,7 @@ public class SceneController implements Initializable
     @FXML
     private void settingsClicked (ActionEvent e) throws Exception
     {
+
     }
 
     @FXML
@@ -79,5 +81,12 @@ public class SceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+    }
+
+    private void changeScene(String filePath) throws IOException {
+        Parent newGameMenuParent = FXMLLoader.load(getClass().getResource("Scene/NewGameScene.fxml"));
+        Scene newGameMenuScene = new Scene(newGameMenuParent);
+        Main.stage.setScene(newGameMenuScene);
+        Main.stage.show();
     }
 }
