@@ -47,27 +47,27 @@
                         <Font size="20.0" />
                     </font>
                 </TextField>
-                <Button fx:id="newGame_btn" layoutX="5.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newGameClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="NEW GAME">
+                <Button fx:id="newGame_btn" layoutX="5.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newGameClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="NEW GAME">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="settings_btn" layoutX="5.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="SETTINGS">
+                <Button fx:id="settings_btn" layoutX="5.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="SETTINGS">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="credits_btn" layoutX="5.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#creditsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="CREDITS">
+                <Button fx:id="credits_btn" layoutX="5.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#creditsClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="CREDITS">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="howToPlay_btn" layoutX="5.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#howToPlayClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="HOW TO PLAY">
+                <Button fx:id="howToPlay_btn" layoutX="5.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#howToPlayClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="HOW TO PLAY">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="exit_btn" layoutX="5.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: left;" text="EXIT">
+                <Button fx:id="exit_btn" layoutX="5.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitClicked" opacity="0.8" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="EXIT">
                     <font>
                         <Font size="20.0" />
                     </font>
