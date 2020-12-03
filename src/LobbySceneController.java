@@ -32,17 +32,6 @@ public class LobbySceneController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            getNicknames();
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
-                        }
-                    }
-                }, 0, 5000);
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(String.valueOf(lobby.getId()));
         try
@@ -57,16 +46,22 @@ public class LobbySceneController implements Initializable
         {
             System.out.println("Database connection problem: " + e.getMessage());
         }
-
-        try
-        {
-            getNicknames();
+        try {
             showHost();
-        }
-        catch (SQLException throwables)
-        {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        new Timer().scheduleAtFixedRate(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            getNicknames();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
+                }, 0, 10);
     }
 
     public static void ifCreated()
@@ -120,30 +115,57 @@ public class LobbySceneController implements Initializable
         }
         if (playerIds.get(2) !=  null)
         {
-            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            String query = "SELECT * from player WHERE id='"+playerIds.get(2)+"'";
             Database.connect();
             Database.stmt = Database.conn.createStatement();
             ResultSet rsPlayer = Database.stmt.executeQuery(query);
             rsPlayer.next();
-            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+            player3Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
         if (playerIds.get(3) !=  null)
         {
-            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            String query = "SELECT * from player WHERE id='"+playerIds.get(3)+"'";
             Database.connect();
             Database.stmt = Database.conn.createStatement();
             ResultSet rsPlayer = Database.stmt.executeQuery(query);
             rsPlayer.next();
-            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+            player4Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
         if (playerIds.get(4) !=  null)
         {
-            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            String query = "SELECT * from player WHERE id='"+playerIds.get(4)+"'";
             Database.connect();
             Database.stmt = Database.conn.createStatement();
             ResultSet rsPlayer = Database.stmt.executeQuery(query);
             rsPlayer.next();
-            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+            player5Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(5) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(5)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player6Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(6) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(6)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player7Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(7) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(7)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player8Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
     }
 
