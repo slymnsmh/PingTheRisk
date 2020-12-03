@@ -8,22 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
+<AnchorPane id="AnchorPane" fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MainSceneController">
     <children>
-      <AnchorPane fx:id="commonUI" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../PingTheRiskFiles/background_img.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sound_img" fitHeight="30.0" fitWidth="33.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
-               <image>
-                  <Image url="@../MainMenuObjects/voiceOn.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
+        <fx:include source="CommonUI.fxml" fx:id="commonUI" />
         <Pane fx:id="menu_pane" layoutX="32.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="310.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="158.0">
             <children>
                 <TextField fx:id="nickname_tf" layoutX="5.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="50.0" prefWidth="300.0" promptText="NICKNAME..." style="-fx-background-color: white;">

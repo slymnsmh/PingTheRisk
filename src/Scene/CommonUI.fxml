@@ -4,18 +4,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="commonUI" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
-        <children>
-      <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../PingTheRiskFiles/background_img.jpg" />
-         </image>
-      </ImageView>
-            <ImageView fx:id="sound_img" fitHeight="30.0" fitWidth="33.0" layoutX="899.0" layoutY="487.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
-                <image>
-                    <Image url="@../MainMenuObjects/voiceOn.png" />
-                </image>
-            </ImageView>
-        </children>
-
+<AnchorPane fx:id="commonUI" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MainSceneController">
+    <children>
+        <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../PingTheRiskFiles/background_img.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="sound_img" fitHeight="30.0" fitWidth="33.0" layoutX="899.0" layoutY="487.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
+            <image>
+                <Image url="@../MainMenuObjects/voiceOn.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

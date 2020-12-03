@@ -1,3 +1,5 @@
+import DatabaseRelatedClasses.Database;
+import DatabaseRelatedClasses.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable
@@ -22,7 +26,8 @@ public class MainSceneController implements Initializable
     @FXML ImageView sound_img;
     @FXML TextField nickname_tf;
     @FXML Button newGame_btn, settings_btn, credits_btn, howToPlay_btn, exit_btn;
-    private boolean isSoundOn = true;
+    public static boolean isSoundOn = true;
+    public static Player player;
 
     @FXML
     private void newGameClicked (ActionEvent e) throws Exception
@@ -34,6 +39,19 @@ public class MainSceneController implements Initializable
         }
         else
         {
+            System.out.println(Database.connect());
+            String query = "INSERT INTO player (nickname, color, score, num_of_hackers, num_of_regions, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
+                    +"VALUES ('"+nickname_tf.getText()+"', 'black', '0', '0', '0', '0', '0', '0', '0', '1')";
+            Database.stmt = Database.conn.createStatement();
+            if (Database.stmt != null)
+            {
+                Database.stmt.executeUpdate(query);
+            }
+            query = "SELECT * FROM player WHERE  nickname='"+nickname_tf.getText()+"'";
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rs = Database.stmt.executeQuery(query);
+            rs.next();
+            player = new Player(rs.getInt("id"),nickname_tf.getText());
             changeScene("Scene/NewGameScene.fxml");
         }
     }
@@ -65,7 +83,6 @@ public class MainSceneController implements Initializable
     @FXML
     private void toggleSound (MouseEvent e)
     {
-        System.out.println(isSoundOn);
         Image soundOff = new Image(getClass().getResourceAsStream("MainMenuObjects/voiceOff.png"));
         Image soundOn = new Image(getClass().getResourceAsStream("MainMenuObjects/voiceOn.png"));
         if (isSoundOn)

@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main_pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
+<AnchorPane fx:id="main_pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="NewGameSceneController">
    <children>
-      <AnchorPane fx:id="commonUI" prefHeight="400.0" prefWidth="600.0">
+      <fx:include fx:id="commonUI" source="CommonUI.fxml" />
+      <Line endX="949.0" endY="165.0" layoutX="-892.0" startX="895.0" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
+      <Line endX="955.4644775390625" endY="165.0" startX="343.4644775390625" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
+      <Pane layoutX="281.0" layoutY="270.0" prefHeight="187.0" prefWidth="400.0" style="-fx-border-color: white; -fx-border-width: 3;">
          <children>
-            <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../PingTheRiskFiles/background_img.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sound_img1" fitHeight="30.0" fitWidth="33.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
-               <image>
-                  <Image url="@../MainMenuObjects/voiceOn.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="joinAGame_btn" ellipsisString="" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#joinAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent;" text="JOIN A GAME" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Futura Bk BT Book" size="40.0" />
+               </font>
+            </Button>
+            <Button fx:id="createAGame_btn" ellipsisString="" layoutX="3.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#createAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent;" text="CREATE A GAME" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="Futura Bk BT Book" size="40.0" />
+               </font>
+            </Button>
          </children>
-      </AnchorPane>
+      </Pane>
+      <Text fill="WHITE" layoutX="67.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW GAME">
+         <font>
+            <Font name="Futura Bk BT Book" size="50.0" />
+         </font>
+      </Text>
+      <Button fx:id="mainMenu_btn" ellipsisString="" layoutX="18.0" layoutY="479.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#mainMenuClicked" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: transparent;" text="MAIN MENU" textFill="WHITE" textOverrun="CLIP">
+         <font>
+            <Font name="Futura Bk BT Book" size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
