@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MainSceneController">
+<AnchorPane id="AnchorPane" fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Scene.MainSceneController">
     <children>
         <fx:include source="CommonUI.fxml" fx:id="commonUI" />
         <Pane fx:id="menu_pane" layoutX="32.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="310.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="158.0">
