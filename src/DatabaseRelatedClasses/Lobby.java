@@ -6,10 +6,10 @@ public class Lobby
     private int id;
     private int hostID;
     private int numOfPlayers;
-    private int[] playerIds;
+    private String playerIds;
     private String[] playerColors;
 
-    public Lobby(int id, int hostID, int numOfPlayers, int[] playerIds, String[] playerColors) {
+    public Lobby(int id, int hostID, int numOfPlayers, String playerIds, String[] playerColors) {
         this.id = id;
         this.hostID = hostID;
         this.numOfPlayers = numOfPlayers;
@@ -41,11 +41,11 @@ public class Lobby
         this.numOfPlayers = numOfPlayers;
     }
 
-    public int[] getPlayerIds() {
+    public String getPlayerIds() {
         return playerIds;
     }
 
-    public void setPlayerIds(int[] playerIds) {
+    public void setPlayerIds(String playerIds) {
         this.playerIds = playerIds;
     }
 

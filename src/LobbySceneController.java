@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable
 {
@@ -23,14 +25,24 @@ public class LobbySceneController implements Initializable
     @FXML private Text players_txt, player1_txt, player2_txt, player3_txt, player4_txt, player5_txt, player6_txt, player7_txt, player8_txt;
     @FXML private AnchorPane commonUI;
     private String[] nicknames;
-    private Lobby lobby;
+    private static Lobby lobby;
     ResultSet rs;
     ArrayList<Integer> playerIds = new ArrayList<Integer>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        lobby = NewGameSceneController.lobby;
+        new Timer().schedule(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            getNicknames();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
+                }, 0, 5000);
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(String.valueOf(lobby.getId()));
         try
@@ -57,6 +69,16 @@ public class LobbySceneController implements Initializable
         }
     }
 
+    public static void ifCreated()
+    {
+        lobby = NewGameSceneController.lobby;
+    }
+
+    public static void ifJoined()
+    {
+        lobby = JoinGameSceneController.lobby;
+    }
+
     public void getNicknames() throws SQLException
     {
         String playerIdsStr = rs.getString("player_IDs");
@@ -75,8 +97,54 @@ public class LobbySceneController implements Initializable
         }
         int id = Integer.parseInt(idStr);
         playerIds.add(id);
+        for (int i = 0; i < playerIds.size(); i++)
+            System.out.println(playerIds.get(i));
+
         if (playerIds.get(0) !=  null)
-            player1Nickname_txt.setText(String.valueOf(playerIds.get(0)));
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(0)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player1Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(1) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(2) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(3) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
+        if (playerIds.get(4) !=  null)
+        {
+            String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            player2Nickname_txt.setText(rsPlayer.getString("nickname"));
+        }
     }
 
     public void showHost() throws SQLException

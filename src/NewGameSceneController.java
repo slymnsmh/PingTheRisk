@@ -35,21 +35,21 @@ public class NewGameSceneController implements Initializable
     {
         System.out.println(Database.connect());
         Player lobbyHost = MainSceneController.player;
-        //int randomID = generateLobbyId();
-        /*while (randomID == -1)
+        int randomID = generateLobbyId();
+        while (randomID == -1)
         {
             randomID = generateLobbyId();
-        }*/
-        int randomID = 123456789;
+        }
         System.out.println("RANDOM ID: " + randomID);
-        /*String query = "INSERT INTO lobby (id, host_id, num_of_players, player_IDs, player_colors)"
+        String query = "INSERT INTO lobby (id, host_id, num_of_players, player_IDs, player_colors)"
                 +"VALUES ( '"+randomID+"','"+lobbyHost.getId()+"', '1', '"+lobbyHost.getId()+"', 'red')";
         Database.stmt = Database.conn.createStatement();
         if (Database.stmt != null)
         {
             Database.stmt.executeUpdate(query);
-        }*/
-        lobby = new Lobby(randomID, lobbyHost.getId(), 1, new int[]{lobbyHost.getId()}, new String[]{"red"});
+        }
+        lobby = new Lobby(randomID, lobbyHost.getId(), 1, String.valueOf(lobbyHost.getId()), new String[]{"red"});
+        LobbySceneController.ifCreated();
         changeScene("Scene/LobbyScene.fxml");
     }
 

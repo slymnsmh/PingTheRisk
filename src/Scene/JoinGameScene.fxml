@@ -9,17 +9,17 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JoinGameSceneController">
     <children>
         <fx:include fx:id="commonUI" source="CommonUI.fxml" />
-      <Text fx:id="gameID_txt" fill="WHITE" layoutX="202.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME ID">
+      <Text fx:id="gameID_txt" fill="WHITE" layoutX="186.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME ID">
          <font>
             <Font name="Futura Bk BT Book" size="50.0" />
          </font>
       </Text>
-      <TextField fx:id="gameID_tf" layoutX="451.0" layoutY="244.0" opacity="0.6" prefHeight="25.0" prefWidth="340.0" promptText="Enter game id..." style="-fx-padding: empty;">
+      <TextField fx:id="gameID_tf" layoutX="435.0" layoutY="244.0" opacity="0.6" prefHeight="25.0" prefWidth="340.0" promptText="Enter game id..." style="-fx-padding: empty;">
          <font>
             <Font size="35.0" />
          </font>
       </TextField>
-      <Button fx:id="go_btn" ellipsisString="" layoutX="433.0" layoutY="346.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goClicked" opacity="0.8" prefHeight="51.0" prefWidth="94.0" style="-fx-background-color: white; -fx-padding: empty;" text="GO" textOverrun="CLIP">
+      <Button fx:id="go_btn" ellipsisString="" layoutX="434.0" layoutY="344.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goClicked" opacity="0.8" prefHeight="51.0" prefWidth="94.0" style="-fx-background-color: white; -fx-padding: empty;" text="GO" textOverrun="CLIP">
          <font>
             <Font name="Futura Bk BT Book" size="40.0" />
          </font>
@@ -29,6 +29,11 @@
             <Font name="Futura Bk BT Book" size="30.0" />
          </font>
       </Button>
+      <Text fx:id="situation_txt" fill="WHITE" fontSmoothingType="LCD" layoutX="196.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="568.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
     </children>
 
 </AnchorPane>

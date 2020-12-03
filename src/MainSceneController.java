@@ -43,10 +43,7 @@ public class MainSceneController implements Initializable
             String query = "INSERT INTO player (nickname, color, score, num_of_hackers, num_of_regions, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
                     +"VALUES ('"+nickname_tf.getText()+"', 'black', '0', '0', '0', '0', '0', '0', '0', '1')";
             Database.stmt = Database.conn.createStatement();
-            if (Database.stmt != null)
-            {
-                Database.stmt.executeUpdate(query);
-            }
+            Database.stmt.executeUpdate(query);
             query = "SELECT * FROM player WHERE  nickname='"+nickname_tf.getText()+"'";
             Database.stmt = Database.conn.createStatement();
             ResultSet rs = Database.stmt.executeQuery(query);
