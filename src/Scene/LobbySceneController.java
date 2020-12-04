@@ -3,13 +3,17 @@ package Scene;
 import DatabaseRelatedClasses.Database;
 import DatabaseRelatedClasses.Lobby;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,18 +40,6 @@ public class LobbySceneController implements Initializable
     {
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(String.valueOf(lobby.getId()));
-        try
-        {
-            String query = "SELECT * from lobby WHERE id='"+ lobby.getId()+"'";
-            Database.connect();
-            Database.stmt = Database.conn.createStatement();
-            rs = Database.stmt.executeQuery(query);
-            rs.next();
-        }
-        catch (Exception e)
-        {
-            System.out.println("Database connection problem: " + e.getMessage());
-        }
         try {
             showHost();
         } catch (SQLException throwables) {
@@ -58,12 +50,26 @@ public class LobbySceneController implements Initializable
                     @Override
                     public void run() {
                         try {
+                            System.out.println("ANAN");
+                            try
+                            {
+                                String query = "SELECT * from lobby WHERE id='"+ lobby.getId()+"'";
+                                Database.connect();
+                                Database.stmt = Database.conn.createStatement();
+                                rs = Database.stmt.executeQuery(query);
+                                rs.next();
+                            }
+                            catch (Exception e)
+                            {
+                                System.out.println("Database connection problem: " + e.getMessage());
+                            }
                             getNicknames();
+
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
                     }
-                }, 0, 10);
+                }, 0, 1000);
     }
 
     public static void ifCreated()
@@ -79,25 +85,44 @@ public class LobbySceneController implements Initializable
     public void getNicknames() throws SQLException
     {
         String playerIdsStr = rs.getString("player_IDs");
-        System.out.println(playerIdsStr);
         String idStr = "";
         for (int i = 0; i < playerIdsStr.length(); i++)
         {
             if (playerIdsStr.charAt(i) == ',')
             {
-                int id = Integer.parseInt(idStr);
-                playerIds.add(id);
+                boolean isThere = false;
+                for (int j = 0; j < playerIds.size(); j++)
+                {
+                    if (playerIds.get(j) == Integer.parseInt(idStr))
+                        isThere = true;
+                }
+                if (!isThere)
+                {
+                    System.out.println("Eklendi: " + idStr);
+                    int id = Integer.parseInt(idStr);
+                    playerIds.add(id);
+                }
                 idStr = "";
                 continue;
             }
             idStr += playerIdsStr.charAt(i);
         }
-        int id = Integer.parseInt(idStr);
-        playerIds.add(id);
+        boolean isThere = false;
         for (int i = 0; i < playerIds.size(); i++)
+        {
             System.out.println(playerIds.get(i));
+            System.out.println("Size: " + playerIds.size());
+            if (playerIds.get(i) == Integer.parseInt(idStr))
+                isThere = true;
+        }
+        if (!isThere)
+        {
+            System.out.println("Eklendi: " + idStr);
+            int id = Integer.parseInt(idStr);
+            playerIds.add(id);
+        }
 
-        if (playerIds.get(0) !=  null)
+        if (playerIds.size() >= 1)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(0)+"'";
             Database.connect();
@@ -106,7 +131,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player1Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(1) !=  null)
+        if (playerIds.size() >= 2)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(1)+"'";
             Database.connect();
@@ -115,7 +140,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player2Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(2) !=  null)
+        if (playerIds.size() >= 3)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(2)+"'";
             Database.connect();
@@ -124,7 +149,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player3Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(3) !=  null)
+        if (playerIds.size() >= 4)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(3)+"'";
             Database.connect();
@@ -133,7 +158,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player4Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(4) !=  null)
+        if (playerIds.size() >= 5)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(4)+"'";
             Database.connect();
@@ -142,7 +167,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player5Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(5) !=  null)
+        if (playerIds.size() >= 6)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(5)+"'";
             Database.connect();
@@ -151,7 +176,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player6Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(6) !=  null)
+        if (playerIds.size() >= 7)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(6)+"'";
             Database.connect();
@@ -160,7 +185,7 @@ public class LobbySceneController implements Initializable
             rsPlayer.next();
             player7Nickname_txt.setText(rsPlayer.getString("nickname"));
         }
-        if (playerIds.get(7) !=  null)
+        if (playerIds.size() == 8)
         {
             String query = "SELECT * from player WHERE id='"+playerIds.get(7)+"'";
             Database.connect();
