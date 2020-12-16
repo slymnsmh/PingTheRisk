@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="main_pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Scene.NewGameSceneController">
+<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.NewGameSceneController">
    <children>
       <fx:include fx:id="commonUI" source="CommonUI.fxml" />
-      <Line endX="949.0" endY="165.0" layoutX="-892.0" startX="895.0" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
-      <Line endX="955.4644775390625" endY="165.0" startX="343.4644775390625" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
-      <Pane layoutX="281.0" layoutY="270.0" prefHeight="187.0" prefWidth="400.0" style="-fx-border-color: white; -fx-border-width: 3;">
+      <Line endX="949.0" endY="165.0" layoutX="-892.0" startX="914.0" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
+      <Line endX="935.0" endY="165.0" startX="343.4644775390625" startY="165.0" stroke="WHITE" strokeWidth="5.0" />
+      <Pane layoutX="280.0" layoutY="270.0" prefHeight="187.0" prefWidth="400.0">
          <children>
-            <Button fx:id="joinAGame_btn" ellipsisString="" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#joinAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent;" text="JOIN A GAME" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="joinAGame_btn" ellipsisString="" layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#joinAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent; -fx-border-width: 5; -fx-border-color: white;" text="JOIN A GAME" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Futura Bk BT Book" size="40.0" />
                </font>
             </Button>
-            <Button fx:id="createAGame_btn" ellipsisString="" layoutX="3.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#createAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent;" text="CREATE A GAME" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="createAGame_btn" ellipsisString="" layoutX="3.0" layoutY="92.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#createAGameClicked" prefHeight="97.0" prefWidth="395.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 5;" text="CREATE A GAME" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Futura Bk BT Book" size="40.0" />
                </font>

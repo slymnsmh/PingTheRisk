@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="commonUI" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Scene.MainSceneController">
+<AnchorPane fx:id="commonUI" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CommonUIController">
     <children>
-        <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="background_img" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../PingTheRiskFiles/background_img.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="sound_img" fitHeight="30.0" fitWidth="33.0" layoutX="899.0" layoutY="487.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="23.6837215423584" AnchorPane.leftAnchor="899.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="487.0">
+        <ImageView fx:id="sound_img" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="57.46511459350586" AnchorPane.leftAnchor="1819.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="987.0">
             <image>
                 <Image url="@../MainMenuObjects/voiceOn.png" />
             </image>

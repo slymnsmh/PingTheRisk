@@ -1,5 +1,7 @@
 package DatabaseRelatedClasses;
 
+import java.util.ArrayList;
+
 public class Lobby
 {
     //properties
@@ -41,8 +43,29 @@ public class Lobby
         this.numOfPlayers = numOfPlayers;
     }
 
-    public String getPlayerIds() {
+    public String getPlayerIds()
+    {
         return playerIds;
+    }
+
+    public ArrayList<String> getPlayerIdsArray()
+    {
+        ArrayList <String> playerIdsArray = new ArrayList<>();
+
+        String id = "";
+        for (int i = 0; i < playerIds.length(); i++)
+        {
+            if (playerIds.charAt(i) == ',')
+            {
+                playerIdsArray.add(id);
+                id = "";
+                continue;
+            }
+            id += playerIds.charAt(i);
+        }
+        playerIdsArray.add(id);
+
+        return playerIdsArray;
     }
 
     public void setPlayerIds(String playerIds) {

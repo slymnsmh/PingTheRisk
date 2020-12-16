@@ -1,39 +1,36 @@
-package Scene;
+package Controllers;
 
 import DatabaseRelatedClasses.Database;
-import DatabaseRelatedClasses.Player;
+import ServerClasses.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import Scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable
 {
-    public ImageView background_img;
-    @FXML AnchorPane main_pane;
-    @FXML ImageView sound_img;
-    @FXML TextField nickname_tf;
-    @FXML Button newGame_btn, settings_btn, credits_btn, howToPlay_btn, exit_btn;
-    public static boolean isSoundOn = true;
+    @FXML public TextField nickname_tf;
+    @FXML public Button newGame_btn, settings_btn, credits_btn, howToPlay_btn, exit_btn;
     public static Player player;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+    }
 
     @FXML
     private void newGameClicked (ActionEvent e) throws Exception
     {
+        System.out.println(nickname_tf.getId());
         if (nickname_tf.getText().equals(""))
         {
             nickname_tf.setStyle("-fx-background-color: black; -fx-text-inner-color: white;");
@@ -41,8 +38,19 @@ public class MainSceneController implements Initializable
         }
         else
         {
+            newGame_btn.setDisable(true);
+            settings_btn.setDisable(true);
+            credits_btn.setDisable(true);
+            howToPlay_btn.setDisable(true);
+            exit_btn.setDisable(true);
             System.out.println(Database.connect());
-            String query = "INSERT INTO player (nickname, color, score, num_of_hackers, num_of_regions, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
+
+            Socket socket = new Socket("18.185.120.197", 2641);
+            System.out.println("Connected to the server");
+
+
+
+            String query = "INSERT INTO player (nickname, color, score, num_of_hackers, num_of_countries, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
                     +"VALUES ('"+nickname_tf.getText()+"', 'black', '0', '0', '0', '0', '0', '0', '0', '1')";
             Database.stmt = Database.conn.createStatement();
             Database.stmt.executeUpdate(query);
@@ -50,27 +58,26 @@ public class MainSceneController implements Initializable
             Database.stmt = Database.conn.createStatement();
             ResultSet rs = Database.stmt.executeQuery(query);
             rs.next();
-            player = new Player(rs.getInt("id"),nickname_tf.getText());
-            changeScene("NewGameScene.fxml");
+            NewGameScene newGameScene = new NewGameScene();
         }
     }
 
     @FXML
     private void settingsClicked (ActionEvent e) throws Exception
     {
-        changeScene("SettingsScene.fxml");
+        SettingScene settingScene = new SettingScene();
     }
 
     @FXML
     private void creditsClicked (ActionEvent e) throws Exception
     {
-        changeScene("CreditsScene.fxml");
+        CreditsScene creditsScene = new CreditsScene();
     }
 
     @FXML
     private void howToPlayClicked (ActionEvent e) throws Exception
     {
-        changeScene("HowToPlayScene.fxml");
+        HowToPlayScene howToPlayScene = new HowToPlayScene();
     }
 
     @FXML
@@ -79,34 +86,12 @@ public class MainSceneController implements Initializable
         System.exit(0);
     }
 
-    @FXML
-    private void toggleSound (MouseEvent e)
-    {
-        Image soundOff = new Image(getClass().getResourceAsStream("MainMenuObjects/voiceOff.png"));
-        Image soundOn = new Image(getClass().getResourceAsStream("MainMenuObjects/voiceOn.png"));
-        if (isSoundOn)
-        {
-            sound_img.setImage(soundOff);
-            isSoundOn = false;
-        }
-        else
-        {
-            sound_img.setImage(soundOn);
-            isSoundOn = true;
-        }
-        System.out.println(isSoundOn);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-    }
-
-    private void changeScene(String filePath) throws IOException
+    /*private void changeScene(String filePath) throws IOException
     {
         Parent newGameMenuParent = FXMLLoader.load(getClass().getResource(filePath));
         Scene newGameMenuScene = new Scene(newGameMenuParent);
         Main.stage.setScene(newGameMenuScene);
         Main.stage.show();
-    }
+        CommonUIController.isSoundOn = isSoundOn;
+    }*/
 }
