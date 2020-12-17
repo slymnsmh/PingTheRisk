@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" visible="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.ProgressIndicatorSceneController">
+   <children>
+      <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.4" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: black;" />
+      <ProgressIndicator fx:id="progressIndicator" layoutX="435.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="91.0" progress="0.0" style="-fx-background-color: white; -fx-background-insets: -10;" />
+   </children>
+</AnchorPane>
