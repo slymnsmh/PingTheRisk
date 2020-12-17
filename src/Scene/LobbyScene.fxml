@@ -12,16 +12,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
 <children>
     <fx:include fx:id="commonUI" source="CommonUI.fxml" />
-      <GridPane fx:id="players_grid" layoutX="436.0" layoutY="505.0" opacity="0.8" prefHeight="330.0" prefWidth="1053.0" style="-fx-background-color: white; -fx-border-insets: color; -fx-alignment: center;">
+      <GridPane fx:id="players_grid" layoutX="181.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="250.0" prefWidth="513.0" style="-fx-background-color: white; -fx-border-insets: color; -fx-alignment: center;">
         <columnConstraints>
           <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -32,42 +32,42 @@
          <children>
             <Text fx:id="player1_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player2_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player3_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player4_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player5_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 5" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player6_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 6" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player7_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 7" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <Text fx:id="player8_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 8" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <font>
-                  <Font size="30.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
             <ImageView fx:id="p1host_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="LEFT">
@@ -102,7 +102,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p2Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <ImageView fx:id="p2Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -129,7 +129,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p3Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <ImageView fx:id="p3Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -156,7 +156,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p4Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+            <ImageView fx:id="p4Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -183,7 +183,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p5Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+            <ImageView fx:id="p5Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -210,7 +210,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p6Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <ImageView fx:id="p6Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -237,7 +237,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p7Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <ImageView fx:id="p7Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -264,7 +264,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <ImageView fx:id="p8Remove_img" fitHeight="20.0" fitWidth="20.0" onMouseClicked="#banClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+            <ImageView fx:id="p8Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -277,22 +277,22 @@
             </ImageView>
          </children>
       </GridPane>
-      <Text fx:id="lobbyIdLabel_txt" fill="WHITE" layoutX="622.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby Id:">
+      <Text fx:id="lobbyIdLabel_txt" fill="WHITE" layoutX="248.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby Id:">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <Text fx:id="lobbyId_txt" fill="WHITE" layoutX="456.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="281.9063768386841">
          <font>
             <Font size="65.0" />
          </font>
       </Text>
-      <Text fx:id="lobbyId_txt" fill="WHITE" layoutX="913.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.6397752761841">
+      <Text fx:id="players_txt" fill="WHITE" layoutX="374.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
          <font>
-            <Font size="65.0" />
+            <Font size="45.0" />
          </font>
       </Text>
-      <Text fx:id="players_txt" fill="WHITE" layoutX="886.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
-         <font>
-            <Font size="65.0" />
-         </font>
-      </Text>
-      <Button fx:id="startGame_btn" layoutX="1122.0" layoutY="877.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startGameClicked" prefHeight="50.0" prefWidth="414.0" text="Start Game">
+      <Button fx:id="startGame_btn" layoutX="1122.0" layoutY="877.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="414.0" text="Start Game">
          <font>
             <Font size="36.0" />
          </font>

@@ -37,7 +37,7 @@ public class ServerController {
                 int index = 0;
                 while (command.charAt(index) != ':')
                     index++;
-                String inputStr = command.substring(index + 1, command.length() - 1);
+                String inputStr = command.substring(index + 1, command.length());
                 System.out.println("Input: " + inputStr);
                 command = command.substring(0, index);
                 System.out.println("Command: " + command);
@@ -92,7 +92,7 @@ public class ServerController {
         while (inputStr.charAt(index) != ':')
             index++;
         String lobbyId = inputStr.substring(0, index);
-        String playerId = inputStr.substring(index + 1, inputStr.length()-1);
+        String playerId = inputStr.substring(index + 1, inputStr.length());
         System.out.println("Joining player \"" + playerId + "to lobby \"" + lobbyId + "\"...");
         String query = "SELECT * from lobby WHERE id='"+lobbyId+"'";
         Database.stmt = Database.conn.createStatement();
@@ -129,7 +129,9 @@ public class ServerController {
     public boolean createLobby(String inputStr) {
         Lobby lobby = null;
         try {
+            System.out.println("BEFORE LOBBY CREATED");
             lobby = new Lobby(inputStr);
+            System.out.println("LOBBY CREATED");
             lobbies.add(lobby);
             String query = "INSERT INTO lobby (id, host_id, num_of_players, player_IDs, player_colors)"
                     + "VALUES ( '" + lobby.getId() + "','" + lobby.getHostId() + "', '1', '" + lobby.getHostId() + "', '" + lobby.getPlayerColors()[0] + "')";

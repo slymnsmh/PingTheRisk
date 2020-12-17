@@ -11,11 +11,12 @@ import java.util.Random;
 public class Lobby
 {
     //properties
+    final int MAX_NUM_OF_PLAYERS = 4;
     private int id;
     private int hostId;
     private int numOfPlayers;
     private String playerIds;
-    private Color[] playerColors;
+    private Color[] playerColors = new Color[MAX_NUM_OF_PLAYERS];
     private Color[] colors = {Color.BLUE, Color.RED, Color.GREEN, Color.ORANGE};
 
     public Lobby(String hostId) throws SQLException {
@@ -62,10 +63,12 @@ public class Lobby
             int randomIndex = 0;
             do {
                 randomIndex = new Random().nextInt(4);
-            } while (!(playerColors[randomIndex] == null));
+            } while (playerColors[randomIndex] != null);
             playerColors[randomIndex] = colors[counter];
             counter++;
         }
+        for (Color c : playerColors)
+            System.out.println(c);
     }
 
     public int getId() {

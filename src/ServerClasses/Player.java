@@ -24,10 +24,6 @@ public class Player
 
     public Player( String nickname ) throws SQLException {
         this.id = generatePlayerId();
-        while (this.id == -1)
-        {
-            this.id = generatePlayerId();
-        }
         this.nickname = nickname;
         this.color = "";
         this.numOfHackers = 0;
