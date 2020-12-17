@@ -22,9 +22,12 @@ public class Player
     private int numOfBonusHackers;
     private boolean isOnline;
 
-    public Player( String nickname )
-    {
-        this.id = id;
+    public Player( String nickname ) throws SQLException {
+        this.id = generatePlayerId();
+        while (this.id == -1)
+        {
+            this.id = generatePlayerId();
+        }
         this.nickname = nickname;
         this.color = "";
         this.numOfHackers = 0;
@@ -77,10 +80,12 @@ public class Player
 
     public int generatePlayerId() throws SQLException
     {
-        String query = "SELECT * FROM lobby";
+        String query = "SELECT * FROM player";
+        System.out.println(Database.connect());
         Database.stmt = Database.conn.createStatement();
         ResultSet rs = Database.stmt.executeQuery(query);
-        int randomID = 100000000 + new Random().nextInt(999999999);
+        int randomID = 1 + new Random().nextInt(999999999);
+        System.out.println("RANDOM PLAYER ID " + randomID);
         boolean isThere = false;
         while (rs.next())
         {

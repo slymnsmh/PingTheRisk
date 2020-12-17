@@ -14,12 +14,7 @@ public class Main extends Application
     public void start(Stage primaryStage) throws Exception
     {
         stage = primaryStage;
-
         MainScene mainScene = new MainScene();
-
-        stage.setMaximized(true);
-        stage.setResizable(true);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Ping The Risk v1.0");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/StageObjects/pingTheRisk_logo.png")));
         stage.show();

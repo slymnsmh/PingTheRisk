@@ -1,67 +1,86 @@
 package Controllers;
 
-import DatabaseRelatedClasses.Database;
-import DatabaseRelatedClasses.Lobby;
+import ServerClasses.Lobby;
+import Scene.JoinGameScene;
 import Scene.LobbyScene;
 import Scene.NewGameScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
 public class JoinGameSceneController implements Initializable
 {
-
     @FXML private Text situation_txt;
+    @FXML private AnchorPane main_pane;
+    @FXML private Button go_btn;
+    @FXML private Button back_btn;
     @FXML private TextField gameID_tf;
-    public static Lobby lobby;
+    private Socket socket = null;
+    private DataInputStream input = null;
+    private DataOutputStream output = null;
+    private ByteArrayInputStream inputByte = null;
+    public static String playerId;
+    public static String lobbyId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        playerId = JoinGameScene.playerId;
     }
 
     @FXML
     private void goClicked (ActionEvent e) throws Exception
     {
-        String query = "SELECT * from lobby WHERE id='"+gameID_tf.getText()+"'";
-        Database.connect();
-        Database.stmt = Database.conn.createStatement();
-        ResultSet rs = Database.stmt.executeQuery(query);
-        if (rs.next())
+        if (gameID_tf.getText().equals(""))
         {
-            query = "UPDATE lobby set num_of_players = num_of_players + 1, player_IDs = concat(player_IDs, ',"+MainSceneController.player.getId()+"') WHERE id = '"+gameID_tf.getText()+"'";
-            Database.stmt = Database.conn.createStatement();
-            Database.stmt.executeUpdate(query);
-
-            query = "SELECT * from lobby WHERE id='"+gameID_tf.getText()+"'";
-            Database.connect();
-            Database.stmt = Database.conn.createStatement();
-            rs = Database.stmt.executeQuery(query);
-            rs.next();
-
-            lobby = new Lobby(rs.getInt("id"), rs.getInt("host_id"), rs.getInt("num_of_players"), rs.getString("player_IDs"), new String[]{"red"});
-            System.out.println("LOBBY: ");
-            System.out.println(rs.getString("player_IDs"));
-            System.out.println(rs.getInt("num_of_players"));
-            System.out.println("---------------------------");
-            LobbySceneController.ifJoined();
-            LobbyScene scene = new LobbyScene();
+            gameID_tf.setStyle("-fx-background-color: black; -fx-text-inner-color: white;");
+            gameID_tf.setPromptText("Enter a Game ID!");
         }
         else
         {
-            situation_txt.setText("Invalid Lobby ID!");
+            lobbyId = gameID_tf.getText();
+            main_pane.setCursor(Cursor.WAIT);
+            go_btn.setDisable(true);
+            back_btn.setDisable(true);
+            String sendInfo = "join_game:" + gameID_tf.getText() + ":" + playerId;
+            try {
+                socket = new Socket("18.185.120.197", 2641);
+                System.out.println("Connected to the server");
+                input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                output = new DataOutputStream(socket.getOutputStream());
+            } catch (Exception ex) {
+                System.out.println("There is a problem while connecting the server.");
+                System.out.println(ex);
+            }
+            output.writeUTF(sendInfo);
+
+            if (input.readUTF().equals("+ok+")) {
+                LobbySceneController.ifJoined();
+                LobbyScene scene = new LobbyScene();
+            }
+            else if (input.readUTF().equals("+invalid_lobby_id+"))
+            {
+                situation_txt.setText("Invalid Lobby ID!");
+            }
         }
     }
 
     @FXML
     private void backClicked (ActionEvent e) throws Exception
     {
-        NewGameScene newGameScene = new NewGameScene();
+        NewGameScene newGameScene = new NewGameScene(playerId);
     }
 }
