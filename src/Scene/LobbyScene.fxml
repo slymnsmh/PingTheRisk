@@ -12,16 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
 <children>
     <fx:include fx:id="commonUI" source="CommonUI.fxml" />
-      <GridPane fx:id="players_grid" layoutX="181.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="250.0" prefWidth="513.0" style="-fx-background-color: white; -fx-border-insets: color; -fx-alignment: center;">
+      <GridPane fx:id="players_grid" layoutX="289.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="232.0" prefWidth="356.0" style="-fx-background-color: white; -fx-border-insets: color; -fx-alignment: center;">
         <columnConstraints>
           <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.20004882812498" minWidth="-Infinity" prefWidth="111.20002441406251" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="243.99997558593753" minWidth="-Infinity" prefWidth="243.99997558593753" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -30,42 +28,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text fx:id="player1_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+            <Text fx:id="player1_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="  Player 1" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="player2_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <Text fx:id="player2_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="  Player 2" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="player3_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <Text fx:id="player3_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="  Player 3" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="player4_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="player5_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 5" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="player6_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 6" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="player7_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 7" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text fx:id="player8_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 8" wrappingWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <Text fx:id="player4_txt" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="  Player 4" wrappingWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <font>
                   <Font size="16.0" />
                </font>
@@ -167,127 +145,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="p5host_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="LEFT">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../MainMenuObjects/host_icon.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="player5Nickname_txt" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.0" GridPane.columnIndex="4" GridPane.halignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </Text>
-            <ImageView fx:id="p5Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@ban_icon.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="p6host_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../MainMenuObjects/host_icon.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="player6Nickname_txt" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </Text>
-            <ImageView fx:id="p6Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@ban_icon.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="p7host_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../MainMenuObjects/host_icon.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="player7Nickname_txt" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </Text>
-            <ImageView fx:id="p7Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@ban_icon.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="p8host_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../MainMenuObjects/host_icon.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="player8Nickname_txt" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </Text>
-            <ImageView fx:id="p8Remove_img" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <image>
-                  <Image url="@ban_icon.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
          </children>
       </GridPane>
-      <Text fx:id="lobbyIdLabel_txt" fill="WHITE" layoutX="248.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby Id:">
+      <Text fx:id="lobbyIdLabel_txt" fill="WHITE" layoutX="265.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby Id:">
          <font>
             <Font size="29.0" />
          </font>
       </Text>
-      <Text fx:id="lobbyId_txt" fill="WHITE" layoutX="456.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="281.9063768386841">
+      <Text fx:id="lobbyId_txt" fill="WHITE" layoutX="398.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.30634021759033">
          <font>
-            <Font size="65.0" />
+            <Font size="29.0" />
          </font>
       </Text>
-      <Text fx:id="players_txt" fill="WHITE" layoutX="374.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
+      <Text fx:id="players_txt" fill="WHITE" layoutX="397.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players">
          <font>
             <Font size="45.0" />
          </font>
