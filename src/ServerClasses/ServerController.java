@@ -1,7 +1,6 @@
 package ServerClasses;
 
 import DatabaseRelatedClasses.Database;
-import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 
 import java.awt.*;
 import java.io.*;
@@ -200,7 +199,7 @@ public class ServerController {
         for (String pIdStr : lobby.getPlayerIdsArray()) {
             Player p = null;
             for (Player p1 : players) {
-                if (p.getId() == Integer.valueOf(pIdStr)) {
+                if (p1.getId() == Integer.valueOf(pIdStr)) {
                     p = p1;
                     break;
                 }
