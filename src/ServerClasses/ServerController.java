@@ -179,8 +179,9 @@ public class ServerController {
         while (inputStr.charAt(index) != ':')
             index++;
         String playerId = inputStr.substring(0, index);
+        System.out.println("INPUT P ID: " + playerId);
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
-        System.out.println("upload lobby basladi");
+        System.out.println("INPUT L ID: " + lobbyId);
         String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
         Database.connect();
         Database.stmt = Database.conn.createStatement();
@@ -195,6 +196,7 @@ public class ServerController {
             System.out.println("PLAYER'S GAME ID: " + p.getGameId());
             System.out.println("LOBBY ID: " + lobbyId);
             if (p.getGameId() == Integer.valueOf(lobbyId)) {
+                System.out.println("player ıds: " + lobby.getPlayerIds());
                 if (!(lobby.getPlayerIds().contains(String.valueOf(p.getId())))) {
                     System.out.println("PLAYER IP: " + p.getIp());
                     System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
