@@ -226,8 +226,21 @@ public class ServerController {
                     ResultSet rs = Database.stmt.executeQuery(query);
                     rs.next();*/
                     System.out.println("PLAYER'S NICKNAME: " + p.getNickname());
-                    out.writeUTF(lobby.getPlayerIds()); //nicknames
-                    System.out.println("NICKNAME SENT.");
+                    String nicknames = "";
+                    for (String pId : lobby.getPlayerIdsArray())
+                    {
+                        for (Player p1 : players)
+                        {
+                            if (p1.getId() == Integer.valueOf(pId))
+                            {
+                                nicknames += p1.getNickname() + ",";
+                                break;
+                            }
+                        }
+                    }
+                    nicknames = nicknames.substring(0, nicknames.length() - 1);
+                    out.writeUTF(nicknames); //nicknames
+                    System.out.println("NICKNAMES SENT.");
                 } catch (IOException e) {
                     System.out.println("SOCKET OLMADI!");
                     e.printStackTrace();
