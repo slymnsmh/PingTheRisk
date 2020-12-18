@@ -96,14 +96,14 @@ public class ServerController {
             index++;
         String lobbyId = inputStr.substring(0, index);
         String playerId = inputStr.substring(index + 1, inputStr.length());
-        for (Lobby l : lobbies)
+        /*for (Lobby l : lobbies)
         {
             if (l.getId() == Integer.valueOf(lobbyId))
             {
                 l.setNumOfPlayers(l.getNumOfPlayers() + 1);
                 l.setPlayerIds(l.getPlayerIds() + playerId);
             }
-        }
+        }*/
         for (Player p : players)
         {
             if (p.getId() == Integer.valueOf(playerId)) {
