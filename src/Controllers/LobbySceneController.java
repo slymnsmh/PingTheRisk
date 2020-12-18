@@ -38,14 +38,14 @@ public class LobbySceneController implements Initializable {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
-        update();
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         while (isStop)
         {
-            try {
-                LobbyScene lobbyScene = new LobbyScene(playerId, lobbyId);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            update();
         }
         /*Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -63,7 +63,6 @@ public class LobbySceneController implements Initializable {
 
     public void update() {
         try {
-            socket = new Socket("18.185.120.197", 2641);
             System.out.println("Connected to the server");
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             output = new DataOutputStream(socket.getOutputStream());
