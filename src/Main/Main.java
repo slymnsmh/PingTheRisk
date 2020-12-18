@@ -16,6 +16,10 @@ public class Main extends Application
         stage = primaryStage;
         MainScene mainScene = new MainScene();
         stage.setTitle("Ping The Risk v1.0");
+
+        //stage.setMaximized(true);
+        //stage.setFullScreen(true);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/StageObjects/pingTheRisk_logo.png")));
         stage.show();
     }

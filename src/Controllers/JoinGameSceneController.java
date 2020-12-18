@@ -66,14 +66,17 @@ public class JoinGameSceneController implements Initializable
                 System.out.println(ex);
             }
             output.writeUTF(sendInfo);
-
-            if (input.readUTF().equals("+ok+")) {
+            String response = input.readUTF();
+            if (response.equals("+ok+")) {
                 LobbySceneController.ifJoined();
-                LobbyScene scene = new LobbyScene();
+                LobbyScene scene = new LobbyScene(playerId, lobbyId);
             }
-            else if (input.readUTF().equals("+invalid_lobby_id+"))
+            else if (response.equals("+invalid_lobby_id+"))
             {
                 situation_txt.setText("Invalid Lobby ID!");
+                main_pane.setCursor(Cursor.DEFAULT);
+                go_btn.setDisable(false);
+                back_btn.setDisable(false);
             }
         }
     }

@@ -32,7 +32,6 @@ public class MainSceneController implements Initializable
     @FXML
     private void newGameClicked (ActionEvent e) throws Exception
     {
-        System.out.println(nickname_tf.getId());
         if (nickname_tf.getText().equals(""))
         {
             nickname_tf.setStyle("-fx-background-color: black; -fx-text-inner-color: white;");

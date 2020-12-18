@@ -11,7 +11,7 @@
                 <Image url="@../PingTheRiskFiles/background_img.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="sound_img" fitHeight="40.0" fitWidth="40.0" layoutX="895.0" layoutY="478.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="26.46511459350586" AnchorPane.leftAnchor="895.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="478.0">
+        <ImageView fx:id="sound_img" fitHeight="40.0" fitWidth="40.0" layoutX="1823.0" layoutY="998.0" onMouseClicked="#toggleSound" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="46.46511459350586" AnchorPane.leftAnchor="1823.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="998.0">
             <image>
                 <Image url="@../MainMenuObjects/voiceOn.png" />
             </image>

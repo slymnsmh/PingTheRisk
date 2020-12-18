@@ -1,9 +1,6 @@
 package ServerClasses;
 
-import Controllers.LobbySceneController;
-import Controllers.MainSceneController;
 import DatabaseRelatedClasses.Database;
-import Scene.LobbyScene;
 
 import java.awt.*;
 import java.io.*;
@@ -15,8 +12,6 @@ import java.util.*;
 public class ServerController {
     private Socket socket = null;
     private ServerSocket server = null;
-    private DataInputStream in = null;
-    private DataOutputStream out = null;
     private ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Lobby> lobbies = new ArrayList<Lobby>();
     private ArrayList<Game> games = new ArrayList<Game>();
@@ -29,10 +24,10 @@ public class ServerController {
             while (true)
             {
                 socket = server.accept();
+                DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 System.out.println("--- Client" + counter + "accepted ---");
                 counter++;
-                in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                out = new DataOutputStream(socket.getOutputStream());
                 String command = in.readUTF();
                 int index = 0;
                 while (command.charAt(index) != ':')
@@ -43,16 +38,18 @@ public class ServerController {
                 System.out.println("Command: " + command);
                 switch (command){
                     case "create_player":
-                        createPlayer(inputStr);
+                        createPlayer(in, out, inputStr, socket);
                         break;
                     case "join_game":
-                        joinGame(inputStr);
+                        joinGame(in, out, inputStr, socket);
                         break;
                     case "create_lobby":
-                        createLobby(inputStr);
+                        createLobby(in, out, inputStr, socket);
                         break;
+                    case "update_lobby":
+                        updateLobby(in, out, inputStr, socket);
                 }
-                socket.close();
+                //socket.close();
             }
 
         }
@@ -62,13 +59,18 @@ public class ServerController {
         }
     }
 
-    public boolean createPlayer(String inputStr) throws IOException {
+    public boolean createPlayer(DataInputStream in, DataOutputStream out, String inputStr, Socket createPlayerSocket) throws IOException {
         try {
             System.out.println("Inserting player \"" + inputStr + "\" to database...");
-            Player p = new Player(inputStr);
+            String playerSocketAddress = createPlayerSocket.getInetAddress().getHostAddress();
+
+            System.out.println("IP:::::: " + playerSocketAddress);
+            System.out.println("PORT:::: " + createPlayerSocket.getPort());
+            Player p = new Player(inputStr, createPlayerSocket.getInetAddress().getHostAddress(), String.valueOf(createPlayerSocket.getPort()));
+            p.setCreatePlayerSocket(createPlayerSocket);
             System.out.println(p.getId());
-            String query = "INSERT INTO player (id, nickname, color, score, num_of_hackers, num_of_countries, countries, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
-                    +"VALUES ('"+p.getId()+"','"+inputStr+"', '-', '0', '0', '0', '-', '0', '0', '0', '0', '1')";
+            String query = "INSERT INTO player (id, game_id, nickname, color, score, num_of_hackers, num_of_countries, countries, num_of_wins, num_of_losses, num_of_bonus_cards, num_of_bonus_hackers, is_online)"
+                    +"VALUES ('"+p.getId()+"','0','"+inputStr+"', '-', '0', '0', '0', '-', '0', '0', '0', '0', '1')";
             Database.stmt = Database.conn.createStatement();
             if (Database.stmt != null)
                 Database.stmt.executeUpdate(query);
@@ -80,19 +82,24 @@ public class ServerController {
             System.out.println("Inserted player \"" + inputStr + "\" to database.");
             return true;
         } catch (SQLException i) {
-            socket.close();
+            //socket.close();
             System.out.println(i);
             System.out.println("Couldn't insert player \"" + inputStr + "\" to database.");
             return false;
         }
     }
 
-    public boolean joinGame(String inputStr) throws SQLException, IOException {
+    public boolean joinGame(DataInputStream in, DataOutputStream out, String inputStr, Socket joinGameSocket) throws SQLException, IOException {
         int index = 0;
         while (inputStr.charAt(index) != ':')
             index++;
         String lobbyId = inputStr.substring(0, index);
         String playerId = inputStr.substring(index + 1, inputStr.length());
+        for (Player p : players)
+        {
+            if (p.getId() == Integer.valueOf(playerId))
+                p.setJoinGameSocket(joinGameSocket);
+        }
         System.out.println("Joining player \"" + playerId + "to lobby \"" + lobbyId + "\"...");
         String query = "SELECT * from lobby WHERE id='"+lobbyId+"'";
         Database.stmt = Database.conn.createStatement();
@@ -117,6 +124,7 @@ public class ServerController {
             System.out.println(rs.getInt("num_of_players"));
             System.out.println("---------------------------");
             out.writeUTF("+ok+");
+
             return true;
         }
         else
@@ -125,14 +133,34 @@ public class ServerController {
             return false;
         }
     }
-
-    public boolean createLobby(String inputStr) {
+/*
+    public void getNicknames() throws SQLException {
+        ArrayList<String> playerIds = lobby.getPlayerIdsArray();
+        ArrayList<String> playerNicknames = new ArrayList<>();
+        for (String j : playerIds) {
+            String query = "SELECT * from player WHERE id='" + j + "'";
+            Database.connect();
+            Database.stmt = Database.conn.createStatement();
+            ResultSet rsPlayer = Database.stmt.executeQuery(query);
+            rsPlayer.next();
+            playerNicknames.add(rsPlayer.getString("nickname"));
+        }
+    }
+*/
+    public boolean createLobby(DataInputStream in, DataOutputStream out, String hostId, Socket createGameSocket) {
         Lobby lobby = null;
         try {
             System.out.println("BEFORE LOBBY CREATED");
-            lobby = new Lobby(inputStr);
+            lobby = new Lobby(hostId);
             System.out.println("LOBBY CREATED");
             lobbies.add(lobby);
+            for (Player p : players)
+            {
+                if (p.getId() == Integer.valueOf(hostId)) {
+                    p.setGameId(lobby.getId());
+                    p.setCreateLobbySocket(createGameSocket);
+                }
+            }
             String query = "INSERT INTO lobby (id, host_id, num_of_players, player_IDs, player_colors)"
                     + "VALUES ( '" + lobby.getId() + "','" + lobby.getHostId() + "', '1', '" + lobby.getHostId() + "', '" + lobby.getPlayerColors()[0] + "')";
             Database.stmt = Database.conn.createStatement();
@@ -143,6 +171,53 @@ public class ServerController {
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
             return false;
+        }
+    }
+
+    public void updateLobby(DataInputStream in, DataOutputStream out, String inputStr, Socket updateLobbySocket) throws SQLException {
+        int index = 0;
+        while (inputStr.charAt(index) != ':')
+            index++;
+        String playerId = inputStr.substring(0, index);
+        String lobbyId = inputStr.substring(index + 1, inputStr.length());
+        System.out.println("upload lobby basladi");
+        String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
+        Database.connect();
+        Database.stmt = Database.conn.createStatement();
+        ResultSet rs = Database.stmt.executeQuery(query);
+        rs.next();
+        Lobby lobby = new Lobby(rs.getInt("id"), rs.getInt("host_id"), rs.getInt("num_of_players"),
+                rs.getString("player_IDs"), new Color[]{});
+        for (Player p : players) {
+            if (p.getId() == Integer.valueOf(playerId))
+                p.setUpdateLobbySocket(updateLobbySocket);
+            System.out.println("PLAYER'S GAME ID: " + p.getGameId());
+            System.out.println("LOBBY ID: " + lobbyId);
+            if (p.getGameId() == Integer.valueOf(lobbyId)) {
+                System.out.println("PLAYER IP: " + p.getIp());
+                System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
+                Socket socket = null;
+                try {
+                    socket = p.getUpdateLobbySocket();
+                    System.out.println("PLAYER IP: " + p.getIp());
+                    System.out.println("PLAYER PORT: " + p.getPort());
+                    in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                    out = new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF("+upload+");//upload permission
+                    System.out.println("UPLOAD MESSAGE SENT.");
+                    out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
+                    System.out.println("PLAYER NUMBER SENT.");
+                    query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
+                    rs = Database.stmt.executeQuery(query);
+                    rs.next();
+                    System.out.println("PLAYER'S NICKNAME: " + rs.getString("nickname"));
+                    out.writeUTF(rs.getString("nickname")); //nickname
+                    System.out.println("NICKNAME SENT.");
+                } catch (IOException e) {
+                    System.out.println("SOCKET OLMADI!");
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

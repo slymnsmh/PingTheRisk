@@ -1,6 +1,7 @@
 package Controllers;
 
 import DatabaseRelatedClasses.Database;
+import Scene.LobbyScene;
 import ServerClasses.Lobby;
 import Managers.GameManager;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.io.*;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,52 +23,59 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
-    @FXML
-    ImageView p2Remove_img, p3Remove_img, p4Remove_img, p5Remove_img, p6Remove_img, p7Remove_img, p8Remove_img;
-    @FXML
-    private Text lobbyId_txt;
-    @FXML
-    private ImageView p1host_img;
-    @FXML
-    private Text player1Nickname_txt, player2Nickname_txt, player3Nickname_txt, player4Nickname_txt;
-    @FXML
-    private GridPane players_grid;
+    @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img, p5Remove_img, p6Remove_img, p7Remove_img, p8Remove_img;
+    @FXML private Text lobbyId_txt;
+    @FXML private ImageView p1host_img;
+    @FXML private Text player1Nickname_txt, player2Nickname_txt, player3Nickname_txt, player4Nickname_txt;
+    @FXML private GridPane players_grid;
     ResultSet rs;
+    private Socket socket = null;
+    private DataInputStream input = null;
+    private DataOutputStream output = null;
+    private ByteArrayInputStream inputByte = null;
+    public static String playerId;
     public static String lobbyId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        playerId = LobbyScene.playerId;
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+            System.out.println("Connected to the server");
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
+            String request = "update_lobby:" + playerId + ":" + lobbyId;
+            output.writeUTF(request);
+        } catch (Exception ex) {
+            System.out.println("There is a problem while connecting the server.");
+            System.out.println(ex);
+        }
+        String response = "";
+        int playerNumber = 0;
+        String playerNicknamesStr = "";
+        try {
+            response = input.readUTF();
+            System.out.println(response);
+            playerNumber = Integer.valueOf(input.readUTF());
+            System.out.println(playerNumber);
+            playerNicknamesStr = input.readUTF();
+            System.out.println(playerNicknamesStr);
+        } catch (IOException e) {
+            System.out.println("olmadı");
+            e.printStackTrace();
+        }
+        System.out.println("ANAN1");
+        if (response.equals("+upload+")) {
+            System.out.println("ANAN2");
+            getNicknames(playerNumber, playerNicknamesStr);
+        }
         /*try {
             showHost();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }*/
-        new Timer().scheduleAtFixedRate(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        /*try {*/
-                            System.out.println("ANAN");
-                            try {
-                                String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
-                                Database.connect();
-                                Database.stmt = Database.conn.createStatement();
-                                rs = Database.stmt.executeQuery(query);
-                                rs.next();
-                                /*lobby.setPlayerIds(rs.getString("player_IDs"));
-                                lobby.setNumOfPlayers(rs.getInt("num_of_players"));*/
-                            } catch (Exception e) {
-                                System.out.println("Database connection problem: " + e.getMessage());
-                            }
-                            //getNicknames();
-
-                        /*} catch (SQLException throwables) {
-                            throwables.printStackTrace();
-                        }*/
-                    }
-                }, 0, 1);
     }
 
     public static void ifCreated() {
@@ -76,18 +86,24 @@ public class LobbySceneController implements Initializable {
         lobbyId = JoinGameSceneController.lobbyId;
     }
 
-    /*public void getNicknames() throws SQLException {
-        ArrayList<String> playerIds = lobby.getPlayerIdsArray();
+    public void getNicknames(int playerNumber, String playerNicknamesStr) {
         ArrayList<String> playerNicknames = new ArrayList<>();
-        for (String j : playerIds) {
-            String query = "SELECT * from player WHERE id='" + j + "'";
-            Database.connect();
-            Database.stmt = Database.conn.createStatement();
-            ResultSet rsPlayer = Database.stmt.executeQuery(query);
-            rsPlayer.next();
-            playerNicknames.add(rsPlayer.getString("nickname"));
+        for (int i = 0; i < playerNumber; i++)
+        {
+            System.out.println("ANAN3");
+            int counter = 0;
+            while (counter < playerNicknamesStr.length() && playerNicknamesStr.charAt(counter) != ',') {
+                counter++;
+            }
+            playerNicknames.add(playerNicknamesStr.substring(0, counter));
+            if (playerNicknamesStr.length() > counter)
+                playerNicknamesStr = playerNicknamesStr.substring(counter + 1);
+            System.out.println(playerNicknames.get(i));
+            System.out.println(playerNicknamesStr);
         }
-        if (playerIds.size() == 1) {
+        System.out.println("ANAN4");
+
+        if (playerNumber == 1) {
             player1Nickname_txt.setText(playerNicknames.get(0));
             player2Nickname_txt.setText("");
             p2Remove_img.setVisible(false);
@@ -95,16 +111,9 @@ public class LobbySceneController implements Initializable {
             p3Remove_img.setVisible(false);
             player4Nickname_txt.setText("");
             p4Remove_img.setVisible(false);
-            player5Nickname_txt.setText("");
-            p5Remove_img.setVisible(false);
-            player6Nickname_txt.setText("");
-            p6Remove_img.setVisible(false);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
+            System.out.println("ANAN5");
         }
-        if (playerIds.size() == 2) {
+        if (playerNumber == 2) {
             player1Nickname_txt.setText(playerNicknames.get(0));
             player2Nickname_txt.setText(playerNicknames.get(1));
             p2Remove_img.setVisible(true);
@@ -112,16 +121,9 @@ public class LobbySceneController implements Initializable {
             p3Remove_img.setVisible(false);
             player4Nickname_txt.setText("");
             p4Remove_img.setVisible(false);
-            player5Nickname_txt.setText("");
-            p5Remove_img.setVisible(false);
-            player6Nickname_txt.setText("");
-            p6Remove_img.setVisible(false);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
+            System.out.println("ANAN6");
         }
-        if (playerIds.size() == 3) {
+        if (playerNumber == 3) {
             player1Nickname_txt.setText(playerNicknames.get(0));
             player2Nickname_txt.setText(playerNicknames.get(1));
             p2Remove_img.setVisible(true);
@@ -129,16 +131,9 @@ public class LobbySceneController implements Initializable {
             p3Remove_img.setVisible(true);
             player4Nickname_txt.setText("");
             p4Remove_img.setVisible(false);
-            player5Nickname_txt.setText("");
-            p5Remove_img.setVisible(false);
-            player6Nickname_txt.setText("");
-            p6Remove_img.setVisible(false);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
+            System.out.println("ANAN7");
         }
-        if (playerIds.size() == 4) {
+        if (playerNumber == 4) {
             player1Nickname_txt.setText(playerNicknames.get(0));
             player2Nickname_txt.setText(playerNicknames.get(1));
             p2Remove_img.setVisible(true);
@@ -146,85 +141,9 @@ public class LobbySceneController implements Initializable {
             p3Remove_img.setVisible(true);
             player4Nickname_txt.setText(playerNicknames.get(3));
             p4Remove_img.setVisible(true);
-            player5Nickname_txt.setText("");
-            p5Remove_img.setVisible(false);
-            player6Nickname_txt.setText("");
-            p6Remove_img.setVisible(false);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
+            System.out.println("ANAN8");
         }
-        if (playerIds.size() == 5) {
-            player1Nickname_txt.setText(playerNicknames.get(0));
-            player2Nickname_txt.setText(playerNicknames.get(1));
-            p2Remove_img.setVisible(true);
-            player3Nickname_txt.setText(playerNicknames.get(2));
-            p3Remove_img.setVisible(true);
-            player4Nickname_txt.setText(playerNicknames.get(3));
-            p4Remove_img.setVisible(true);
-            player5Nickname_txt.setText(playerNicknames.get(4));
-            p5Remove_img.setVisible(true);
-            player6Nickname_txt.setText("");
-            p6Remove_img.setVisible(false);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
-        }
-        if (playerIds.size() == 6) {
-            player1Nickname_txt.setText(playerNicknames.get(0));
-            player2Nickname_txt.setText(playerNicknames.get(1));
-            p2Remove_img.setVisible(true);
-            player3Nickname_txt.setText(playerNicknames.get(2));
-            p3Remove_img.setVisible(true);
-            player4Nickname_txt.setText(playerNicknames.get(3));
-            p4Remove_img.setVisible(true);
-            player5Nickname_txt.setText(playerNicknames.get(4));
-            p5Remove_img.setVisible(true);
-            player6Nickname_txt.setText(playerNicknames.get(5));
-            p6Remove_img.setVisible(true);
-            player7Nickname_txt.setText("");
-            p7Remove_img.setVisible(false);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
-        }
-        if (playerIds.size() == 7) {
-            player1Nickname_txt.setText(playerNicknames.get(0));
-            player2Nickname_txt.setText(playerNicknames.get(1));
-            p2Remove_img.setVisible(true);
-            player3Nickname_txt.setText(playerNicknames.get(2));
-            p3Remove_img.setVisible(true);
-            player4Nickname_txt.setText(playerNicknames.get(3));
-            p4Remove_img.setVisible(true);
-            player5Nickname_txt.setText(playerNicknames.get(4));
-            p5Remove_img.setVisible(true);
-            player6Nickname_txt.setText(playerNicknames.get(5));
-            p6Remove_img.setVisible(true);
-            player7Nickname_txt.setText(playerNicknames.get(6));
-            p7Remove_img.setVisible(true);
-            player8Nickname_txt.setText("");
-            p8Remove_img.setVisible(false);
-        }
-        if (playerIds.size() == 8) {
-            player1Nickname_txt.setText(playerNicknames.get(0));
-            player2Nickname_txt.setText(playerNicknames.get(1));
-            p2Remove_img.setVisible(true);
-            player3Nickname_txt.setText(playerNicknames.get(2));
-            p3Remove_img.setVisible(true);
-            player4Nickname_txt.setText(playerNicknames.get(3));
-            p4Remove_img.setVisible(true);
-            player5Nickname_txt.setText(playerNicknames.get(4));
-            p5Remove_img.setVisible(true);
-            player6Nickname_txt.setText(playerNicknames.get(5));
-            p6Remove_img.setVisible(true);
-            player7Nickname_txt.setText(playerNicknames.get(6));
-            p7Remove_img.setVisible(true);
-            player8Nickname_txt.setText(playerNicknames.get(7));
-            p8Remove_img.setVisible(true);
-        }
-    }*/
-
+    }
     /*@FXML
     public void banClicked(MouseEvent event) throws SQLException {
         //if player is host ekle **********************************************

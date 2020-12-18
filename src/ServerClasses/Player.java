@@ -3,6 +3,7 @@ package ServerClasses;
 import DatabaseRelatedClasses.Country;
 import DatabaseRelatedClasses.Database;
 
+import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Random;
 public class Player
 {
     private int id;
+    private int gameId;
     private String nickname;
     private String color;
     private int numOfHackers;
@@ -21,9 +23,18 @@ public class Player
     private int numOfBonusCards;
     private int numOfBonusHackers;
     private boolean isOnline;
+    private String ip;
+    private String port;
+    Socket createPlayerSocket = null;
+    Socket joinGameSocket = null;
+    Socket createLobbySocket = null;
+    Socket updateLobbySocket = null;
 
-    public Player( String nickname ) throws SQLException {
+    public Player( String nickname, String ip, String port ) throws SQLException {
         this.id = generatePlayerId();
+        this.ip = ip;
+        this.port = port;
+        this.gameId = 0;
         this.nickname = nickname;
         this.color = "";
         this.numOfHackers = 0;
@@ -36,9 +47,12 @@ public class Player
         this.countries = null;
     }
 
-    public Player( int id, String nickname, String color, int numOfHackers, int numOfCountries, ArrayList<Country> countries, int numOfWins, int numOfLosses, int numOfBonusCards, int numOfBonusHackers, boolean isOnline )
+    public Player( int id, String ip, String port, int gameId, String nickname, String color, int numOfHackers, int numOfCountries, ArrayList<Country> countries, int numOfWins, int numOfLosses, int numOfBonusCards, int numOfBonusHackers, boolean isOnline )
     {
         this.id = id;
+        this.ip = ip;
+        this.port = port;
+        this.gameId = gameId;
         this.nickname = nickname;
         this.color = color;
         this.numOfHackers = numOfHackers;
@@ -49,6 +63,62 @@ public class Player
         this.numOfBonusCards = numOfBonusCards;
         this.numOfBonusHackers = numOfBonusHackers;
         this.isOnline = isOnline;
+    }
+
+    public Socket getJoinGameSocket() {
+        return joinGameSocket;
+    }
+
+    public void setJoinGameSocket(Socket joinGameSocket) {
+        this.joinGameSocket = joinGameSocket;
+    }
+
+    public Socket getCreateLobbySocket() {
+        return createLobbySocket;
+    }
+
+    public void setCreateLobbySocket(Socket createGameSocket) {
+        this.createLobbySocket = createGameSocket;
+    }
+
+    public Socket getUpdateLobbySocket() {
+        return updateLobbySocket;
+    }
+
+    public void setUpdateLobbySocket(Socket updateLobbySocket) {
+        this.updateLobbySocket = updateLobbySocket;
+    }
+
+    public Socket getCreatePlayerSocket() {
+        return createPlayerSocket;
+    }
+
+    public void setCreatePlayerSocket(Socket createPlayerSocket) {
+        this.createPlayerSocket = createPlayerSocket;
+    }
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 
     public ArrayList<Country> getCountryListFromString(String countries) throws SQLException

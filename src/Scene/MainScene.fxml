@@ -9,8 +9,8 @@
 
 <AnchorPane id="main_pane" fx:id="main_pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainSceneController">
     <children>
-        <fx:include fx:id="commonUI" prefHeight="540.0" prefWidth="960.0" source="CommonUI.fxml" />
-        <VBox fx:id="menu_vbox" layoutX="33.0" layoutY="96.0" prefHeight="410.0" prefWidth="400.0" spacing="10.0">
+        <fx:include fx:id="commonUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" source="CommonUI.fxml" />
+        <VBox fx:id="menu_vbox" layoutX="59.0" layoutY="188.0" prefHeight="296.0" prefWidth="247.0" spacing="10.0">
             <children>
                 <TextField fx:id="nickname_tf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="250.0" opacity="0.5" prefHeight="60.0" prefWidth="400.0" promptText="NICKNAME..." style="-fx-background-color: white;">
                     <font>
