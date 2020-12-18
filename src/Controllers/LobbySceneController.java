@@ -3,6 +3,7 @@ package Controllers;
 import Scene.LobbyScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -17,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
+    @FXML Button startGame_btn;
     @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
     @FXML private ImageView p1host_img;
@@ -29,56 +31,76 @@ public class LobbySceneController implements Initializable {
     private ByteArrayInputStream inputByte = null;
     public static String playerId;
     public static String lobbyId;// = 456
+    boolean isStop = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
-        Timer timer = new Timer();
+        update();
+        while (isStop)
+        {
+            try {
+                LobbyScene lobbyScene = new LobbyScene(playerId, lobbyId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        /*Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    socket = new Socket("18.185.120.197", 2641);
-                    System.out.println("Connected to the server");
-                    input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                    output = new DataOutputStream(socket.getOutputStream());
-                    String request = "update_lobby:" + playerId + ":" + lobbyId;
-                    output.writeUTF(request);
-                } catch (Exception ex) {
-                    System.out.println("There is a problem while connecting the server.");
-                    System.out.println(ex);
-                }
-                ////////////////////////
 
-                System.out.println("anananananankekekekekeke");
-                String response = "";
-                int playerNumber = 0;
-                String playerNicknamesStr = "";
-                try {
-                    response = input.readUTF();
-                    System.out.println("r1: " + response);
-                    playerNumber = Integer.valueOf(input.readUTF());
-                    System.out.println("r2: " + playerNumber);
-                    playerNicknamesStr += input.readUTF();
-                    System.out.println("r3: " + playerNicknamesStr);
-                } catch (IOException e) {
-                    System.out.println("olmadı");
-                    e.printStackTrace();
-                }
-                System.out.println("ANAN1");
-                if (response.equals("+upload+")) {
-                    System.out.println("ANAN2");
-                    getNicknames(playerNumber, playerNicknamesStr);
-                }
             }
-        }, 0, 1);
+        }, 0, 1);*/
         /*try {
             showHost();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }*/
+    }
+
+    public void update() {
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+            System.out.println("Connected to the server");
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
+            String request = "update_lobby:" + playerId + ":" + lobbyId;
+            output.writeUTF(request);
+        } catch (Exception ex) {
+            System.out.println("There is a problem while connecting the server.");
+            System.out.println(ex);
+        }
+        ////////////////////////
+
+        System.out.println("anananananankekekekekeke");
+        String response = "";
+        int playerNumber = 0;
+        String playerNicknamesStr = "";
+        try {
+            response = input.readUTF();
+            System.out.println("r1: " + response);
+            playerNumber = Integer.valueOf(input.readUTF());
+            System.out.println("r2: " + playerNumber);
+            playerNicknamesStr += input.readUTF();
+            System.out.println("r3: " + playerNicknamesStr);
+        } catch (IOException e) {
+            System.out.println("olmadı");
+            e.printStackTrace();
+        }
+        System.out.println("ANAN1");
+        if (response.equals("+upload+")) {
+            System.out.println("ANAN2");
+            getNicknames(playerNumber, playerNicknamesStr);
+        }
+    }
+
+    @FXML
+    public void startClicked()
+    {
+        isStop = true;
     }
 
     public static void ifCreated() {
