@@ -35,33 +35,34 @@ public class LobbySceneController implements Initializable {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
-        try {
-            socket = new Socket("18.185.120.197", 2641);
-            System.out.println("Connected to the server");
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
-            String request = "update_lobby:" + playerId + ":" + lobbyId;
-            output.writeUTF(request);
-        } catch (Exception ex) {
-            System.out.println("There is a problem while connecting the server.");
-            System.out.println(ex);
-        }
-        ////////////////////////
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                try {
+                    socket = new Socket("18.185.120.197", 2641);
+                    System.out.println("Connected to the server");
+                    input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                    output = new DataOutputStream(socket.getOutputStream());
+                    String request = "update_lobby:" + playerId + ":" + lobbyId;
+                    output.writeUTF(request);
+                } catch (Exception ex) {
+                    System.out.println("There is a problem while connecting the server.");
+                    System.out.println(ex);
+                }
+                ////////////////////////
+
                 System.out.println("anananananankekekekekeke");
                 String response = "";
                 int playerNumber = 0;
                 String playerNicknamesStr = "";
                 try {
                     response = input.readUTF();
-                    System.out.println("r1: "+response);
+                    System.out.println("r1: " + response);
                     playerNumber = Integer.valueOf(input.readUTF());
-                    System.out.println("r2: "+playerNumber);
+                    System.out.println("r2: " + playerNumber);
                     playerNicknamesStr += input.readUTF();
-                    System.out.println("r3: "+playerNicknamesStr);
+                    System.out.println("r3: " + playerNicknamesStr);
                 } catch (IOException e) {
                     System.out.println("olmadı");
                     e.printStackTrace();
