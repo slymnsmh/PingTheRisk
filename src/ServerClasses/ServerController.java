@@ -97,8 +97,10 @@ public class ServerController {
         String playerId = inputStr.substring(index + 1, inputStr.length());
         for (Player p : players)
         {
-            if (p.getId() == Integer.valueOf(playerId))
+            if (p.getId() == Integer.valueOf(playerId)) {
                 p.setJoinGameSocket(joinGameSocket);
+                p.setGameId(Integer.parseInt(lobbyId));
+            }
         }
         System.out.println("Joining player \"" + playerId + "to lobby \"" + lobbyId + "\"...");
         String query = "SELECT * from lobby WHERE id='"+lobbyId+"'";
