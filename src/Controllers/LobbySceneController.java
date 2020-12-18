@@ -44,24 +44,26 @@ public class LobbySceneController implements Initializable {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
         }
-        String response = "";
-        int playerNumber = 0;
-        String playerNicknamesStr = "";
-        try {
-            response = input.readUTF();
-            System.out.println(response);
-            playerNumber = Integer.valueOf(input.readUTF());
-            System.out.println(playerNumber);
-            playerNicknamesStr = input.readUTF();
-            System.out.println(playerNicknamesStr);
-        } catch (IOException e) {
-            System.out.println("olmadı");
-            e.printStackTrace();
-        }
-        System.out.println("ANAN1");
-        if (response.equals("+upload+")) {
-            System.out.println("ANAN2");
-            getNicknames(playerNumber, playerNicknamesStr);
+        while (true) {
+            String response = "";
+            int playerNumber = 0;
+            String playerNicknamesStr = "";
+            try {
+                response = input.readUTF();
+                System.out.println(response);
+                playerNumber = Integer.valueOf(input.readUTF());
+                System.out.println(playerNumber);
+                playerNicknamesStr = input.readUTF();
+                System.out.println(playerNicknamesStr);
+            } catch (IOException e) {
+                System.out.println("olmadı");
+                e.printStackTrace();
+            }
+            System.out.println("ANAN1");
+            if (response.equals("+upload+")) {
+                System.out.println("ANAN2");
+                getNicknames(playerNumber, playerNicknamesStr);
+            }
         }
         /*try {
             showHost();
