@@ -1,6 +1,7 @@
 package ServerClasses;
 
 import DatabaseRelatedClasses.Database;
+import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 
 import java.awt.*;
 import java.io.*;
@@ -120,7 +121,6 @@ public class ServerController {
             rs.next();*/
 
             Lobby lobby = new Lobby(rs.getInt("id"), rs.getInt("host_id"), rs.getInt("num_of_players"), rs.getString("player_IDs"), new Color[]{Color.RED});
-            lobbies.add(lobby);
             System.out.println("LOBBY: ");
             System.out.println(rs.getString("player_IDs"));
             System.out.println(rs.getInt("num_of_players"));
@@ -184,14 +184,27 @@ public class ServerController {
         System.out.println("INPUT P ID: " + playerId);
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
         System.out.println("INPUT L ID: " + lobbyId);
-        String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
+        Lobby lobby = null;
+        for (Lobby l : lobbies)
+        {
+            if (l.getId() == Integer.valueOf(lobbyId))
+            {
+                lobby = l;
+            }
+        }
+        /*String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
         Database.connect();
         Database.stmt = Database.conn.createStatement();
         ResultSet rs = Database.stmt.executeQuery(query);
-        rs.next();
-        Lobby lobby = new Lobby(rs.getInt("id"), rs.getInt("host_id"), rs.getInt("num_of_players"),
-                rs.getString("player_IDs"), new Color[]{});
-        for (Player p : players) {
+        rs.next();*/
+        for (String pIdStr : lobby.getPlayerIdsArray()) {
+            Player p = null;
+            for (Player p1 : players) {
+                if (p.getId() == Integer.valueOf(pIdStr)) {
+                    p = p1;
+                    break;
+                }
+            }
             if (p.getId() == Integer.valueOf(playerId))
                 p.setUpdateLobbySocket(updateLobbySocket);
             System.out.println("player id: " + p.getId());
@@ -210,11 +223,11 @@ public class ServerController {
                     System.out.println("UPLOAD MESSAGE SENT.");
                     out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
                     System.out.println("PLAYER NUMBER SENT.");
-                    query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
-                    rs = Database.stmt.executeQuery(query);
-                    rs.next();
-                    System.out.println("PLAYER'S NICKNAME: " + rs.getString("nickname"));
-                    out.writeUTF(rs.getString("nickname")); //nickname
+                    /*String query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
+                    ResultSet rs = Database.stmt.executeQuery(query);
+                    rs.next();*/
+                    System.out.println("PLAYER'S NICKNAME: " + p.getNickname());
+                    out.writeUTF(lobby.getPlayerIds()); //nicknames
                     System.out.println("NICKNAME SENT.");
                 } catch (IOException e) {
                     System.out.println("SOCKET OLMADI!");

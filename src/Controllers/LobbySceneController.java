@@ -44,26 +44,25 @@ public class LobbySceneController implements Initializable {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
         }
-        while (true) {
-            String response = "";
-            int playerNumber = 0;
-            String playerNicknamesStr = "";
-            try {
-                response = input.readUTF();
-                System.out.println(response);
-                playerNumber = Integer.valueOf(input.readUTF());
-                System.out.println(playerNumber);
-                playerNicknamesStr = input.readUTF();
-                System.out.println(playerNicknamesStr);
-            } catch (IOException e) {
-                System.out.println("olmadı");
-                e.printStackTrace();
-            }
-            System.out.println("ANAN1");
-            if (response.equals("+upload+")) {
-                System.out.println("ANAN2");
-                getNicknames(playerNumber, playerNicknamesStr);
-            }
+        ////////////////////////
+        String response = "";
+        int playerNumber = 0;
+        String playerNicknamesStr = "";
+        try {
+            response = input.readUTF();
+            System.out.println("r1: "+response);
+            playerNumber = Integer.valueOf(input.readUTF());
+            System.out.println("r2: "+playerNumber);
+            playerNicknamesStr += input.readUTF();
+            System.out.println("r3: "+playerNicknamesStr);
+        } catch (IOException e) {
+            System.out.println("olmadı");
+            e.printStackTrace();
+        }
+        System.out.println("ANAN1");
+        if (response.equals("+upload+")) {
+            System.out.println("ANAN2");
+            getNicknames(playerNumber, playerNicknamesStr);
         }
         /*try {
             showHost();
@@ -92,6 +91,8 @@ public class LobbySceneController implements Initializable {
             playerNicknames.add(playerNicknamesStr.substring(0, counter));
             if (playerNicknamesStr.length() > counter)
                 playerNicknamesStr = playerNicknamesStr.substring(counter + 1);
+            else
+                playerNicknamesStr = "";
             System.out.println(playerNicknames.get(i));
             System.out.println(playerNicknamesStr);
         }
