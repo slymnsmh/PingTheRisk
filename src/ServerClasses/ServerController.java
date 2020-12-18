@@ -48,6 +48,7 @@ public class ServerController {
                         break;
                     case "update_lobby":
                         updateLobby(in, out, inputStr, socket);
+                        break;
                 }
                 //socket.close();
             }
@@ -179,7 +180,7 @@ public class ServerController {
         int index = 0;
         while (inputStr.charAt(index) != ':')
             index++;
-        String playerId = inputStr.substring(0, index);
+        String playerId = inputStr.substring(0, index);//
         System.out.println("INPUT P ID: " + playerId);
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
         System.out.println("INPUT L ID: " + lobbyId);

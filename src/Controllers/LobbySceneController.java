@@ -28,11 +28,11 @@ public class LobbySceneController implements Initializable {
     private DataOutputStream output = null;
     private ByteArrayInputStream inputByte = null;
     public static String playerId;
-    public static String lobbyId;
+    public static String lobbyId;// = 456
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        playerId = LobbyScene.playerId;
+        playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
         try {
@@ -51,6 +51,7 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("anananananankekekekekeke");
                 String response = "";
                 int playerNumber = 0;
                 String playerNicknamesStr = "";
@@ -71,7 +72,7 @@ public class LobbySceneController implements Initializable {
                     getNicknames(playerNumber, playerNicknamesStr);
                 }
             }
-        }, 0, 10);
+        }, 0, 1);
         /*try {
             showHost();
         } catch (SQLException throwables) {
