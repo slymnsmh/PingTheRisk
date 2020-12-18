@@ -38,62 +38,50 @@ public class LobbySceneController implements Initializable {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
-        try {
-            socket = new Socket("18.185.120.197", 2641);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        while (isStop)
-        {
-            update();
-        }
-        /*Timer timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                try {
+                    socket = new Socket("18.185.120.197", 2641);
+                    System.out.println("Connected to the server");
+                    input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                    output = new DataOutputStream(socket.getOutputStream());
+                    String request = "update_lobby:" + playerId + ":" + lobbyId;
+                    output.writeUTF(request);
+                } catch (Exception ex) {
+                    System.out.println("There is a problem while connecting the server.");
+                    System.out.println(ex);
+                }
+                ////////////////////////
 
+                System.out.println("anananananankekekekekeke");
+                String response = "";
+                int playerNumber = 0;
+                String playerNicknamesStr = "";
+                try {
+                    response = input.readUTF();
+                    System.out.println("r1: " + response);
+                    playerNumber = Integer.valueOf(input.readUTF());
+                    System.out.println("r2: " + playerNumber);
+                    playerNicknamesStr += input.readUTF();
+                    System.out.println("r3: " + playerNicknamesStr);
+                } catch (IOException e) {
+                    System.out.println("olmadı");
+                    e.printStackTrace();
+                }
+                System.out.println("ANAN1");
+                if (response.equals("+upload+")) {
+                    System.out.println("ANAN2");
+                    getNicknames(playerNumber, playerNicknamesStr);
+                }
             }
-        }, 0, 1);*/
+        }, 0, 1);
         /*try {
             showHost();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }*/
-    }
-
-    public void update() {
-        try {
-            System.out.println("Connected to the server");
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
-            String request = "update_lobby:" + playerId + ":" + lobbyId;
-            output.writeUTF(request);
-        } catch (Exception ex) {
-            System.out.println("There is a problem while connecting the server.");
-            System.out.println(ex);
-        }
-        ////////////////////////
-
-        System.out.println("anananananankekekekekeke");
-        String response = "";
-        int playerNumber = 0;
-        String playerNicknamesStr = "";
-        try {
-            response = input.readUTF();
-            System.out.println("r1: " + response);
-            playerNumber = Integer.valueOf(input.readUTF());
-            System.out.println("r2: " + playerNumber);
-            playerNicknamesStr += input.readUTF();
-            System.out.println("r3: " + playerNicknamesStr);
-        } catch (IOException e) {
-            System.out.println("olmadı");
-            e.printStackTrace();
-        }
-        System.out.println("ANAN1");
-        if (response.equals("+upload+")) {
-            System.out.println("ANAN2");
-            getNicknames(playerNumber, playerNicknamesStr);
-        }
     }
 
     @FXML
