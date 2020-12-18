@@ -1,29 +1,21 @@
 package Controllers;
 
-import DatabaseRelatedClasses.Database;
 import Scene.LobbyScene;
-import ServerClasses.Lobby;
-import Managers.GameManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
-    @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img, p5Remove_img, p6Remove_img, p7Remove_img, p8Remove_img;
+    @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
     @FXML private ImageView p1host_img;
     @FXML private Text player1Nickname_txt, player2Nickname_txt, player3Nickname_txt, player4Nickname_txt;

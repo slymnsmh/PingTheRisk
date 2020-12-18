@@ -191,31 +191,32 @@ public class ServerController {
         for (Player p : players) {
             if (p.getId() == Integer.valueOf(playerId))
                 p.setUpdateLobbySocket(updateLobbySocket);
+            System.out.println("player id: " + p.getId());
             System.out.println("PLAYER'S GAME ID: " + p.getGameId());
             System.out.println("LOBBY ID: " + lobbyId);
             if (p.getGameId() == Integer.valueOf(lobbyId)) {
-                System.out.println("PLAYER IP: " + p.getIp());
-                System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
-                Socket socket = null;
-                try {
-                    socket = p.getUpdateLobbySocket();
+                if (!(lobby.getPlayerIds().contains(String.valueOf(p.getId())))) {
                     System.out.println("PLAYER IP: " + p.getIp());
-                    System.out.println("PLAYER PORT: " + p.getPort());
-                    in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                    out = new DataOutputStream(socket.getOutputStream());
-                    out.writeUTF("+upload+");//upload permission
-                    System.out.println("UPLOAD MESSAGE SENT.");
-                    out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
-                    System.out.println("PLAYER NUMBER SENT.");
-                    query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
-                    rs = Database.stmt.executeQuery(query);
-                    rs.next();
-                    System.out.println("PLAYER'S NICKNAME: " + rs.getString("nickname"));
-                    out.writeUTF(rs.getString("nickname")); //nickname
-                    System.out.println("NICKNAME SENT.");
-                } catch (IOException e) {
-                    System.out.println("SOCKET OLMADI!");
-                    e.printStackTrace();
+                    System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
+                    Socket socket = null;
+                    try {
+                        socket = p.getUpdateLobbySocket();
+                        in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                        out = new DataOutputStream(socket.getOutputStream());
+                        out.writeUTF("+upload+");//upload permission
+                        System.out.println("UPLOAD MESSAGE SENT.");
+                        out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
+                        System.out.println("PLAYER NUMBER SENT.");
+                        query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
+                        rs = Database.stmt.executeQuery(query);
+                        rs.next();
+                        System.out.println("PLAYER'S NICKNAME: " + rs.getString("nickname"));
+                        out.writeUTF(rs.getString("nickname")); //nickname
+                        System.out.println("NICKNAME SENT.");
+                    } catch (IOException e) {
+                        System.out.println("SOCKET OLMADI!");
+                        e.printStackTrace();
+                    }
                 }
             }
         }
