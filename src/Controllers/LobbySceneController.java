@@ -42,6 +42,11 @@ public class LobbySceneController implements Initializable {
 
         while (!isStop)
         {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             refreshClicked();
         }
 
