@@ -44,12 +44,7 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (!isStop)
-                    refreshClicked();
-                else {
-                    timer.cancel();
-                    timer.purge();
-                }
+                refreshClicked();
             }
         }, 0, 5000);
         /*try {
@@ -83,16 +78,11 @@ public class LobbySceneController implements Initializable {
             response = input.readUTF();
             System.out.println("r1: " + response);
             if (response.equals("+upload+")) {
-                playerNumber = Integer.valueOf(input.readUTF());
+                playerNumber = Integer.parseInt(input.readUTF());
                 System.out.println("r2: " + playerNumber);
                 playerNicknamesStr += input.readUTF();
                 System.out.println("r3: " + playerNicknamesStr);
                 getNicknames(playerNumber, playerNicknamesStr);
-            }
-            if (response.equals("+no_upload+"))
-            {
-                isStop = true;
-                return;
             }
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");

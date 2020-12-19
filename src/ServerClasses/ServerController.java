@@ -195,39 +195,38 @@ public class ServerController {
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
         System.out.println("INPUT L ID: " + Integer.parseInt(lobbyId));
         Lobby lobby = null;
-        for (Lobby l : lobbies)
-        {
-            if (l.getId() == Integer.parseInt(lobbyId))
-            {
+        for (Lobby l : lobbies) {
+            if (l.getId() == Integer.parseInt(lobbyId)) {
                 lobby = l;
             }
         }
         System.out.println("HOST ID: " + lobby.getHostId());
-        if (playerId.equals(String.valueOf(lobby.getHostId()))) {
+
         /*String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
         Database.connect();
         Database.stmt = Database.conn.createStatement();
         ResultSet rs = Database.stmt.executeQuery(query);
         rs.next();*/
-            for (String pIdStr : lobby.getPlayerIdsArray()) {
-                Player p = null;
-                System.out.println("pIdStr: " + pIdStr);
-                for (Player p1 : players) {
-                    if (p1.getId() == Integer.parseInt(pIdStr)) {
-                        p = p1;
-                        break;
-                    }
+        for (String pIdStr : lobby.getPlayerIdsArray()) {
+            Player p = null;
+            System.out.println("pIdStr: " + pIdStr);
+            for (Player p1 : players) {
+                if (p1.getId() == Integer.parseInt(pIdStr)) {
+                    p = p1;
+                    break;
                 }
-                if (p.getId() == Integer.parseInt(playerId))
-                    p.setUpdateLobbySocket(updateLobbySocket);
-                System.out.println("player id: " + p.getId());
-                System.out.println("PLAYER'S GAME ID: " + p.getGameId());
-                System.out.println("LOBBY ID: " + lobbyId);
-                if (p.getGameId() == Integer.parseInt(lobbyId)) {
-                    System.out.println("player ıds: " + lobby.getPlayerIds());
-                    System.out.println("PLAYER IP: " + p.getIp());
-                    System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
-                    Socket socket = null;
+            }
+
+            p.setUpdateLobbySocket(updateLobbySocket);
+            System.out.println("player id: " + p.getId());
+            System.out.println("PLAYER'S GAME ID: " + p.getGameId());
+            System.out.println("LOBBY ID: " + lobbyId);
+            if (p.getGameId() == Integer.parseInt(lobbyId)) {
+                System.out.println("player ıds: " + lobby.getPlayerIds());
+                System.out.println("PLAYER IP: " + p.getIp());
+                System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
+                Socket socket = null;
+                if (playerId.equals(String.valueOf(lobby.getHostId()))) {
                     try {
                         socket = p.getUpdateLobbySocket();
                         in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -275,14 +274,13 @@ public class ServerController {
                         }
                         e.printStackTrace();
                     }
+                } else {
+                    try {
+                        out.writeUTF("+no_upload+");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }
-        else {
-            try {
-                out.writeUTF("+no_upload+");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
