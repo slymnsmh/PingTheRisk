@@ -40,13 +40,17 @@ public class LobbySceneController implements Initializable {
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
 
-        Timer timer = new Timer();
+        while (!isStop)
+        {
+            refreshClicked();
+        }
+
+        /*Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refreshClicked();
             }
-        }, 0, 5000);
+        }, 0, 5000);*/
         /*try {
             showHost();
         } catch (SQLException throwables) {
@@ -86,6 +90,7 @@ public class LobbySceneController implements Initializable {
             }
             if (response.equals("+no_upload+"))
             {
+                isStop = true;
                 return;
             }
         } catch (IOException e) {
