@@ -1,6 +1,8 @@
 package Controllers;
 
 import Scene.LobbyScene;
+import Scene.MainScene;
+import Scene.NewGameScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,7 +20,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
-    @FXML Button refresh_btn;
     @FXML Button startGame_btn;
     @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
@@ -217,4 +218,10 @@ public class LobbySceneController implements Initializable {
     public void showHost() throws SQLException {
         p1host_img.setVisible(true);
     }*/
+
+    @FXML
+    public void backClicked () throws IOException {
+        MainSceneController.socket.close();
+        MainScene mainScene = new MainScene();
+    }
 }

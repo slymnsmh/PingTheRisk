@@ -24,7 +24,7 @@ public class NewGameSceneController implements Initializable
     @FXML private AnchorPane main_pane;
     @FXML private Button joinAGame_btn;
     @FXML private Button createAGame_btn;
-    @FXML private Button mainMenu_btn;
+    @FXML private Button back_btn;
     Socket socket = null;
     DataInputStream input = null;
     DataOutputStream output = null;
@@ -50,7 +50,7 @@ public class NewGameSceneController implements Initializable
         Main.stage.getScene().setCursor(Cursor.WAIT);
         joinAGame_btn.setDisable(true);
         createAGame_btn.setDisable(true);
-        mainMenu_btn.setDisable(true);
+        back_btn.setDisable(true);
         String sendInfo = "create_lobby:" + playerId;
         try {
             socket = new Socket("18.185.120.197", 2641);
@@ -72,8 +72,9 @@ public class NewGameSceneController implements Initializable
     }
 
     @FXML
-    private void mainMenuClicked (ActionEvent e) throws Exception
+    private void backClicked (ActionEvent e) throws Exception
     {
+        MainSceneController.socket.close();
         MainScene mainScene = new MainScene();
     }
 

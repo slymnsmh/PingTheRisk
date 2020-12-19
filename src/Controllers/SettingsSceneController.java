@@ -116,7 +116,7 @@ public class SettingsSceneController implements Initializable
         display_menuBtn.setText(clicked.getText());
     }
 
-    public void mainMenuClicked() throws IOException
+    public void backClicked() throws IOException
     {
         MainScene mainScene = new MainScene();
     }

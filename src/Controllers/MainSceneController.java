@@ -1,6 +1,7 @@
 package Controllers;
 
 import ServerClasses.Player;
+import com.sun.glass.ui.ClipboardAssistance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +21,7 @@ public class MainSceneController implements Initializable
     @FXML private AnchorPane main_pane;
     @FXML public TextField nickname_tf;
     @FXML public Button newGame_btn, settings_btn, credits_btn, howToPlay_btn, exit_btn;
-    private Socket socket = null;
+    public static Socket socket = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
 
