@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="main_pane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameSceneController">
+   <children>
+      <ImageView fx:id="background_img" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../MapComponents/background.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="map_pane" layoutX="14.0" layoutY="16.0" prefWidth="782.0">
+         <children>
+            <ImageView fx:id="img1" fitHeight="110.0" fitWidth="110.0" layoutX="133.0" layoutY="-8.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/1/1b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img2" fitHeight="110.0" fitWidth="70.0" layoutX="77.0" layoutY="37.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/2/2g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img3" fitHeight="110.0" fitWidth="110.0" layoutX="101.0" layoutY="54.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/3/3o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img4" fitHeight="110.0" fitWidth="90.0" layoutX="6.0" layoutY="118.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/4/4b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img5" fitHeight="110.0" fitWidth="110.0" layoutX="66.0" layoutY="111.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/5/5r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img6" fitHeight="140.0" fitWidth="120.0" layoutX="153.0" layoutY="104.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/6/6g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img7" fitHeight="76.0" fitWidth="100.0" layoutX="66.0" layoutY="160.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/7/7o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img8" fitHeight="140.0" fitWidth="130.0" layoutX="102.0" layoutY="223.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/8/8b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img9" fitHeight="140.0" fitWidth="90.0" layoutX="116.0" layoutY="267.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/9/9r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img10" fitHeight="140.0" fitWidth="105.0" layoutX="197.0" layoutY="314.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/10/10o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img11" fitHeight="140.0" fitWidth="67.0" layoutX="215.0" layoutY="346.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/12/12g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img12" fitHeight="140.0" fitWidth="105.0" layoutX="198.0" layoutY="340.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/11/11r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img13" fitHeight="140.0" fitWidth="50.0" layoutX="330.0" layoutY="140.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/13/13b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img14" fitHeight="140.0" fitWidth="145.0" layoutX="560.0" layoutY="67.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/14/14o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img15" fitHeight="80.0" fitWidth="80.0" layoutX="384.0" layoutY="122.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/15/15g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img16" fitHeight="140.0" fitWidth="140.0" layoutX="434.0" layoutY="108.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/16/16b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img17" fitHeight="115.0" fitWidth="100.0" layoutX="529.0" layoutY="103.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/17/17r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img18" fitHeight="115.0" fitWidth="120.0" layoutX="557.0" layoutY="145.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/18/18g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img19" fitHeight="150.0" fitWidth="141.0" layoutX="650.0" layoutY="110.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/19/19b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img20" fitHeight="150.0" fitWidth="115.0" layoutX="334.0" layoutY="184.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/20/23r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img21" fitHeight="150.0" fitWidth="50.0" layoutX="427.0" layoutY="239.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/21/24o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img22" fitHeight="150.0" fitWidth="70.0" layoutX="470.0" layoutY="227.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/22/25r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img23" fitHeight="150.0" fitWidth="90.0" layoutX="476.0" layoutY="200.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/23/26o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img24" fitHeight="150.0" fitWidth="80.0" layoutX="530.0" layoutY="241.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/24/27g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img25" fitHeight="150.0" fitWidth="60.0" layoutX="548.0" layoutY="220.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/25/28r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img26" fitHeight="150.0" fitWidth="70.0" layoutX="593.0" layoutY="207.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/26/29b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img27" fitHeight="150.0" fitWidth="65.0" layoutX="338.0" layoutY="256.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/27/30g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img28" fitHeight="150.0" fitWidth="76.0" layoutX="396.0" layoutY="255.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/28/31b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img29" fitHeight="150.0" fitWidth="90.0" layoutX="349.0" layoutY="287.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/29/33r.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img30" fitHeight="150.0" fitWidth="80.0" layoutX="427.0" layoutY="283.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/30/34g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img221" fitHeight="150.0" fitWidth="50.0" layoutX="520.0" layoutY="266.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/31/35b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img32" fitHeight="150.0" fitWidth="50.0" layoutX="563.0" layoutY="279.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/32/36o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img33" fitHeight="150.0" fitWidth="70.0" layoutX="396.0" layoutY="326.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/33/37b.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img34" fitHeight="150.0" fitWidth="135.0" layoutX="216.0" layoutY="-10.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/34/38g.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="img35" fitHeight="150.0" fitWidth="90.0" layoutX="251.0" layoutY="63.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/35/39o.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="num1_lbl" layoutX="184.0" layoutY="24.0" text="1" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num2_lbl" layoutX="106.0" layoutY="65.0" text="2" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num3_lbl" layoutX="158.0" layoutY="80.0" text="3" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num4_lbl" layoutX="39.0" layoutY="138.0" text="4" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num5_lbl" layoutX="110.0" layoutY="129.0" text="5" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num6_lbl" layoutX="190.0" layoutY="168.0" text="6" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num7_lbl" layoutX="116.0" layoutY="187.0" text="7" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num8_lbl" layoutX="141.0" layoutY="232.0" text="8" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num9_lbl" layoutX="147.0" layoutY="275.0" text="9" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num10_lbl" layoutX="225.0" layoutY="320.0" text="10" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num11_lbl" layoutX="253.0" layoutY="371.0" text="11" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num12_lbl" layoutX="225.0" layoutY="396.0" text="12" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num13_lbl" layoutX="347.0" layoutY="144.0" text="13" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num14_lbl" layoutX="621.0" layoutY="113.0" text="14" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num15_lbl" layoutX="412.0" layoutY="128.0" text="15" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num16_lbl" layoutX="476.0" layoutY="164.0" text="16" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num17_lbl" layoutX="558.0" layoutY="143.0" text="17" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num18_lbl" layoutX="621.0" layoutY="172.0" text="18" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num19_lbl" layoutX="721.0" layoutY="138.0" text="19" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num20_lbl" layoutX="402.0" layoutY="208.0" text="20" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num21_lbl" layoutX="439.0" layoutY="237.0" text="21" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num22_lbl" layoutX="491.0" layoutY="257.0" text="22" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num23_lbl" layoutX="513.0" layoutY="218.0" text="23" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num24_lbl" layoutX="554.0" layoutY="254.0" text="24" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num25_lbl" layoutX="569.0" layoutY="234.0" text="25" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num26_lbl" layoutX="609.0" layoutY="251.0" text="26" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num27_lbl" layoutX="369.0" layoutY="263.0" text="27" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num28_lbl" layoutX="423.0" layoutY="272.0" text="28" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num29_lbl" layoutX="384.0" layoutY="299.0" text="29" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num30_lbl" layoutX="452.0" layoutY="312.0" text="30" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num31_lbl" layoutX="534.0" layoutY="279.0" text="31" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num32_lbl" layoutX="581.0" layoutY="289.0" text="32" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num33_lbl" layoutX="419.0" layoutY="361.0" text="33" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num34_lbl" layoutX="271.0" layoutY="45.0" text="34" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num35_lbl" layoutX="273.0" layoutY="119.0" text="35" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox fx:id="nicknames_vbox" layoutX="9.0" layoutY="362.0" prefHeight="138.0" prefWidth="150.0" spacing="20.0">
+         <children>
+            <Label fx:id="p1Nick_lbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" text="-" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="p2Nick_lbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" text="-" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="p3Nick_lbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" text="-" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="p4Nick_lbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" text="-" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox fx:id="buttons_hbox" layoutX="628.0" layoutY="490.0" prefHeight="35.0" prefWidth="312.0" spacing="20.0">
+         <children>
+            <Button fx:id="hire_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" text="HIRE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="hack_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" text="HACK">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="fortify_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" text="FORTIFY">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="hacker_lbl" layoutX="759.0" layoutY="441.0" text="HACKER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <SplitMenuButton fx:id="hackerNum_menu" layoutX="850.0" layoutY="439.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <Button fx:id="howToPlay_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="843.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="49.0" style="-fx-background-radius: 50; -fx-border-radius: 50;" text="How to play" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="settings_btn" alignment="CENTER" contentDisplay="CENTER" layoutX="901.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="49.0" style="-fx-background-radius: 50; -fx-border-radius: 50;" text="Settings" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="cards_img" fitHeight="70.0" fitWidth="50.0" layoutX="890.0" layoutY="348.0" onMouseClicked="#cardsClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/cardsIcon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

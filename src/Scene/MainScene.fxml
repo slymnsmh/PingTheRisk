@@ -7,39 +7,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="main_pane" fx:id="main_pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainSceneController">
+<AnchorPane id="main_pane" fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainSceneController">
     <children>
-        <fx:include fx:id="commonUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" source="CommonUI.fxml" />
-        <VBox fx:id="menu_vbox" layoutX="59.0" layoutY="188.0" prefHeight="296.0" prefWidth="247.0" spacing="10.0">
+        <fx:include fx:id="commonUI" source="CommonUI.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <VBox fx:id="menu_vbox" layoutX="93.0" layoutY="435.0" prefHeight="558.0" prefWidth="350.0" spacing="10.0" AnchorPane.bottomAnchor="86.60000000000002" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="1476.6" AnchorPane.topAnchor="435.0">
             <children>
-                <TextField fx:id="nickname_tf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="250.0" opacity="0.5" prefHeight="60.0" prefWidth="400.0" promptText="NICKNAME..." style="-fx-background-color: white;">
+                <TextField fx:id="nickname_tf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="250.0" opacity="0.5" prefHeight="120.0" prefWidth="400.0" promptText="NICKNAME..." style="-fx-background-color: white;">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </TextField>
-                <Button fx:id="newGame_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#newGameClicked" opacity="0.8" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="NEW GAME">
+                <Button fx:id="newGame_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#newGameClicked" opacity="0.8" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="NEW GAME">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </Button>
-                <Button fx:id="settings_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#settingsClicked" opacity="0.8" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="SETTINGS">
+                <Button fx:id="settings_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#settingsClicked" opacity="0.8" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="SETTINGS">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </Button>
-                <Button fx:id="credits_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#creditsClicked" opacity="0.8" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="CREDITS">
+                <Button fx:id="credits_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#creditsClicked" opacity="0.8" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="CREDITS">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </Button>
-                <Button fx:id="howToPlay_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#howToPlayClicked" opacity="0.8" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="HOW TO PLAY">
+                <Button fx:id="howToPlay_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#howToPlayClicked" opacity="0.8" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="HOW TO PLAY">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </Button>
-                <Button fx:id="exit_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#exitClicked" opacity="0.8" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="EXIT">
+                <Button fx:id="exit_btn" minHeight="40.0" minWidth="250.0" mnemonicParsing="false" onAction="#exitClicked" opacity="0.8" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white; -fx-alignment: center-left;" text="EXIT">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="27.0" />
                     </font>
                 </Button>
             </children>

@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JoinGameSceneController">
+<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.JoinGameSceneController">
     <children>
-        <fx:include fx:id="commonUI" source="CommonUI.fxml" />
-        <Text fx:id="gameID_txt" fill="WHITE" layoutX="186.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME ID">
+        <fx:include fx:id="commonUI" source="CommonUI.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Text fx:id="gameID_txt" fill="WHITE" layoutX="640.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME ID" AnchorPane.bottomAnchor="554.94140625" AnchorPane.leftAnchor="640.0" AnchorPane.rightAnchor="1025.99609375" AnchorPane.topAnchor="445.25390625">
             <font>
-                <Font name="Futura Bk BT Book" size="50.0" />
+                <Font name="System Bold" size="60.0" />
             </font>
         </Text>
-        <TextField fx:id="gameID_tf" layoutX="435.0" layoutY="244.0" opacity="0.6" prefHeight="25.0" prefWidth="340.0" promptText="Enter game id..." style="-fx-padding: empty;">
+        <TextField fx:id="gameID_tf" layoutX="937.0" layoutY="455.0" opacity="0.6" prefHeight="25.0" prefWidth="340.0" promptText="Enter game id..." style="-fx-padding: empty;" AnchorPane.bottomAnchor="566.6" AnchorPane.leftAnchor="937.0" AnchorPane.rightAnchor="643.0" AnchorPane.topAnchor="455.0">
             <font>
-                <Font size="35.0" />
+                <Font size="40.0" />
             </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
         </TextField>
-        <Button fx:id="go_btn" ellipsisString="" layoutX="434.0" layoutY="344.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goClicked" opacity="0.8" prefHeight="51.0" prefWidth="94.0" style="-fx-background-color: white; -fx-padding: empty; -fx-cursor: hand;" text="GO" textOverrun="CLIP">
+        <Button fx:id="go_btn" ellipsisString="" layoutX="871.0" layoutY="622.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goClicked" opacity="0.8" prefHeight="90.0" prefWidth="178.0" style="-fx-background-color: white; -fx-padding: empty; -fx-cursor: hand;" text="GO" textOverrun="CLIP" AnchorPane.bottomAnchor="367.6" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="870.5999999999999" AnchorPane.topAnchor="622.0">
             <font>
-                <Font name="Futura Bk BT Book" size="40.0" />
-            </font>
-        </Button>
-        <Button fx:id="back_btn" ellipsisString="" layoutX="14.0" layoutY="468.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backClicked" prefHeight="51.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-padding: empty;" text="Back" textFill="WHITE" textOverrun="CLIP">
-            <font>
-                <Font name="Futura Bk BT Book" size="30.0" />
+                <Font size="55.0" />
             </font>
         </Button>
         <Text fx:id="situation_txt" fill="WHITE" fontSmoothingType="LCD" layoutX="196.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="568.0">
@@ -34,5 +36,10 @@
                 <Font size="24.0" />
             </font>
         </Text>
+      <Button fx:id="back_btn" ellipsisString="" layoutX="159.0" layoutY="893.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backClicked" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Back" textFill="WHITE" textOverrun="CLIP" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="27.0">
+         <font>
+            <Font name="System Bold" size="50.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
