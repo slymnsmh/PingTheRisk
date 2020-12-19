@@ -195,13 +195,13 @@ public class ServerController {
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
         System.out.println("INPUT L ID: " + Integer.parseInt(lobbyId));
         Lobby lobby = null;
-        for (Lobby l : lobbies) {
-            if (l.getId() == Integer.parseInt(lobbyId)) {
+        for (Lobby l : lobbies)
+        {
+            if (l.getId() == Integer.parseInt(lobbyId))
+            {
                 lobby = l;
             }
         }
-        System.out.println("HOST ID: " + lobby.getHostId());
-
         /*String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
         Database.connect();
         Database.stmt = Database.conn.createStatement();
@@ -226,60 +226,57 @@ public class ServerController {
                 System.out.println("PLAYER IP: " + p.getIp());
                 System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
                 Socket socket = null;
-                if (playerId.equals(String.valueOf(lobby.getHostId()))) {
-                    try {
-                        socket = p.getUpdateLobbySocket();
-                        in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                        out = new DataOutputStream(socket.getOutputStream());
-                        out.writeUTF("+upload+");//upload permission
-                        System.out.println("UPLOAD MESSAGE SENT.");
-                        out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
-                        System.out.println("PLAYER NUMBER SENT.");
+                try {
+                    socket = p.getUpdateLobbySocket();
+                    in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                    out = new DataOutputStream(socket.getOutputStream());
+                    out.writeUTF("+upload+");//upload permission
+                    System.out.println("UPLOAD MESSAGE SENT.");
+                    out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
+                    System.out.println("PLAYER NUMBER SENT.");
                     /*String query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
                     ResultSet rs = Database.stmt.executeQuery(query);
                     rs.next();*/
-                        System.out.println("PLAYER'S NICKNAME: " + p.getNickname());
-                        String nicknames = "";
-                        for (String pId : lobby.getPlayerIdsArray()) {
-                            for (Player p1 : players) {
-                                if (p1.getId() == Integer.parseInt(pId)) {
-                                    nicknames += p1.getNickname() + ",";
-                                    break;
-                                }
+                    System.out.println("PLAYER'S NICKNAME: " + p.getNickname());
+                    String nicknames = "";
+                    for (String pId : lobby.getPlayerIdsArray())
+                    {
+                        for (Player p1 : players)
+                        {
+                            if (p1.getId() == Integer.parseInt(pId))
+                            {
+                                nicknames += p1.getNickname() + ",";
+                                break;
                             }
                         }
-                        nicknames = nicknames.substring(0, nicknames.length() - 1);
-                        out.writeUTF(nicknames); //nicknames
-                        System.out.println("NICKNAMES SENT.");
-                    } catch (IOException e) {
-                        System.out.println("SOCKET OLMADI!");
-                        String playerIds = lobby.getPlayerIds();
-                        if (playerIds.contains(String.valueOf(p.getId()))) {
-                            System.out.println("OLD PLAYER IDS: " + playerIds);
-                            int indexId = playerIds.indexOf(String.valueOf(p.getId()));
-                            System.out.println("INDEX: " + indexId);
-                            playerIds = playerIds.substring(0, indexId);
-                            if ((indexId + 10) < lobby.getPlayerIds().length())
-                                lobby.setPlayerIds(lobby.getPlayerIds().substring(indexId + 10));
-                            else
-                                lobby.setPlayerIds(playerIds.substring(0, playerIds.length() - 1));
-                            lobby.setNumOfPlayers(lobby.getNumOfPlayers() - 1);
-                            System.out.println("NUM OF PLAYERS: " + lobby.getNumOfPlayers());
-                            System.out.println("PLAYER " + p.getId() + " IS REMOVED.");
-                            System.out.println("NEW PLAYEYR IDS: " + lobby.getPlayerIds());
-                        }
-                        players.remove(p);
-                        if (p.getId() == lobby.getHostId() && lobby.getNumOfPlayers() > 0) {
-                            lobby.setHostId(Integer.parseInt(lobby.getPlayerIds().substring(0, 9)));
-                        }
-                        e.printStackTrace();
                     }
-                } else {
-                    try {
-                        out.writeUTF("+no_upload+");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    nicknames = nicknames.substring(0, nicknames.length() - 1);
+                    out.writeUTF(nicknames); //nicknames
+                    System.out.println("NICKNAMES SENT.");
+                } catch (IOException e) {
+                    System.out.println("SOCKET OLMADI!");
+                    String playerIds = lobby.getPlayerIds();
+                    if (playerIds.contains(String.valueOf(p.getId())))
+                    {
+                        System.out.println("OLD PLAYER IDS: " + playerIds);
+                        int indexId = playerIds.indexOf(String.valueOf(p.getId()));
+                        System.out.println("INDEX: " + indexId);
+                        playerIds = playerIds.substring(0, indexId);
+                        if ((indexId + 10) < lobby.getPlayerIds().length())
+                            lobby.setPlayerIds(lobby.getPlayerIds().substring(indexId + 10));
+                        else
+                            lobby.setPlayerIds(playerIds.substring(0, playerIds.length() - 1));
+                        lobby.setNumOfPlayers(lobby.getNumOfPlayers() - 1);
+                        System.out.println("NUM OF PLAYERS: " + lobby.getNumOfPlayers());
+                        System.out.println("PLAYER " + p.getId() + " IS REMOVED.");
+                        System.out.println("NEW PLAYEYR IDS: " + lobby.getPlayerIds());
                     }
+                    players.remove(p);
+                    if (p.getId() == lobby.getHostId() && lobby.getNumOfPlayers() > 0)
+                    {
+                        lobby.setHostId(Integer.parseInt(lobby.getPlayerIds().substring(0, 9)));
+                    }
+                    e.printStackTrace();
                 }
             }
         }

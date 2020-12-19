@@ -44,7 +44,7 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refresh();
+                refreshClicked();
             }
         }, 0, 5000);
         /*try {
@@ -54,7 +54,8 @@ public class LobbySceneController implements Initializable {
         }*/
     }
 
-    public void refresh()
+    @FXML
+    public void refreshClicked()
     {
         try {
             socket = new Socket("18.185.120.197", 2641);
@@ -77,7 +78,7 @@ public class LobbySceneController implements Initializable {
             response = input.readUTF();
             System.out.println("r1: " + response);
             if (response.equals("+upload+")) {
-                playerNumber = Integer.parseInt(input.readUTF());
+                playerNumber = Integer.valueOf(input.readUTF());
                 System.out.println("r2: " + playerNumber);
                 playerNicknamesStr += input.readUTF();
                 System.out.println("r3: " + playerNicknamesStr);
@@ -86,6 +87,7 @@ public class LobbySceneController implements Initializable {
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
+        System.out.println("ANAN1");
     }
 
     @FXML
