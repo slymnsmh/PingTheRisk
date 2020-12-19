@@ -1,6 +1,5 @@
 package Controllers;
 
-import ServerClasses.Lobby;
 import Scene.JoinGameScene;
 import Scene.LobbyScene;
 import Scene.NewGameScene;
@@ -55,7 +54,7 @@ public class JoinGameSceneController implements Initializable
             main_pane.setCursor(Cursor.WAIT);
             go_btn.setDisable(true);
             back_btn.setDisable(true);
-            String sendInfo = "join_game:" + gameID_tf.getText() + ":" + playerId;
+            String sendInfo = "join_game:" + playerId + ":" + gameID_tf.getText();
             try {
                 socket = new Socket("18.185.120.197", 2641);
                 System.out.println("Connected to the server");

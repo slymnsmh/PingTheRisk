@@ -18,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
+    @FXML Button refresh_btn;
     @FXML Button startGame_btn;
     @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
@@ -38,50 +39,56 @@ public class LobbySceneController implements Initializable {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    socket = new Socket("18.185.120.197", 2641);
-                    System.out.println("Connected to the server");
-                    input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                    output = new DataOutputStream(socket.getOutputStream());
-                    String request = "update_lobby:" + playerId + ":" + lobbyId;
-                    output.writeUTF(request);
-                } catch (Exception ex) {
-                    System.out.println("There is a problem while connecting the server.");
-                    System.out.println(ex);
-                }
-                ////////////////////////
-
-                System.out.println("anananananankekekekekeke");
-                String response = "";
-                int playerNumber = 0;
-                String playerNicknamesStr = "";
-                try {
-                    response = input.readUTF();
-                    System.out.println("r1: " + response);
-                    playerNumber = Integer.valueOf(input.readUTF());
-                    System.out.println("r2: " + playerNumber);
-                    playerNicknamesStr += input.readUTF();
-                    System.out.println("r3: " + playerNicknamesStr);
-                } catch (IOException e) {
-                    System.out.println("olmadı");
-                    e.printStackTrace();
-                }
-                System.out.println("ANAN1");
-                if (response.equals("+upload+")) {
-                    System.out.println("ANAN2");
-                    getNicknames(playerNumber, playerNicknamesStr);
-                }
+                refreshClicked();
             }
-        }, 0, 1);
+        }, 0, 5000);
         /*try {
             showHost();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }*/
+    }
+
+    @FXML
+    public void refreshClicked()
+    {
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+            System.out.println("Connected to the server");
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
+            String request = "update_lobby:" + playerId + ":" + lobbyId;
+            output.writeUTF(request);
+            System.out.println("RESPONSE SENT!!! : " + request);
+        } catch (Exception ex) {
+            System.out.println("There is a problem while connecting the server.");
+            System.out.println(ex);
+        }
+        ////////////////////////
+
+        String response = "";
+        int playerNumber = 0;
+        String playerNicknamesStr = "";
+        try {
+            response = input.readUTF();
+            System.out.println("r1: " + response);
+            playerNumber = Integer.valueOf(input.readUTF());
+            System.out.println("r2: " + playerNumber);
+            playerNicknamesStr += input.readUTF();
+            System.out.println("r3: " + playerNicknamesStr);
+        } catch (IOException e) {
+            System.out.println("No answer from server. Trying again...");
+        }
+        System.out.println("ANAN1");
+        if (response.equals("+upload+")) {
+            System.out.println("ANAN2");
+            getNicknames(playerNumber, playerNicknamesStr);
+        }
     }
 
     @FXML

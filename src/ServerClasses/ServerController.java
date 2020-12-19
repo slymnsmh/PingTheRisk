@@ -94,19 +94,21 @@ public class ServerController {
         int index = 0;
         while (inputStr.charAt(index) != ':')
             index++;
-        String lobbyId = inputStr.substring(0, index);
-        String playerId = inputStr.substring(index + 1, inputStr.length());
-        /*for (Lobby l : lobbies)
+        String playerId = inputStr.substring(0, index);
+        String lobbyId = inputStr.substring(index + 1, inputStr.length());
+        System.out.println("LOBBY JOIN P ID: " + playerId);
+        System.out.println("LOBBY JOIN L ID: " + lobbyId);
+        for (Lobby l : lobbies)
         {
-            if (l.getId() == Integer.valueOf(lobbyId))
+            if (l.getId() == Integer.parseInt(lobbyId))
             {
                 l.setNumOfPlayers(l.getNumOfPlayers() + 1);
-                l.setPlayerIds(l.getPlayerIds() + playerId);
+                l.setPlayerIds(l.getPlayerIds() +","+ playerId);
             }
-        }*/
+        }
         for (Player p : players)
         {
-            if (p.getId() == Integer.valueOf(playerId)) {
+            if (p.getId() == Integer.parseInt(playerId)) {
                 p.setJoinGameSocket(joinGameSocket);
                 p.setGameId(Integer.parseInt(lobbyId));
             }
@@ -166,7 +168,7 @@ public class ServerController {
             lobbies.add(lobby);
             for (Player p : players)
             {
-                if (p.getId() == Integer.valueOf(hostId)) {
+                if (p.getId() == Integer.parseInt(hostId)) {
                     p.setGameId(lobby.getId());
                     p.setCreateLobbySocket(createGameSocket);
                 }
@@ -189,13 +191,13 @@ public class ServerController {
         while (inputStr.charAt(index) != ':')
             index++;
         String playerId = inputStr.substring(0, index);//
-        System.out.println("INPUT P ID: " + playerId);
+        System.out.println("INPUT P ID: " + Integer.parseInt(playerId));
         String lobbyId = inputStr.substring(index + 1, inputStr.length());
-        System.out.println("INPUT L ID: " + lobbyId);
+        System.out.println("INPUT L ID: " + Integer.parseInt(lobbyId));
         Lobby lobby = null;
         for (Lobby l : lobbies)
         {
-            if (l.getId() == Integer.valueOf(lobbyId))
+            if (l.getId() == Integer.parseInt(lobbyId))
             {
                 lobby = l;
             }
@@ -207,18 +209,19 @@ public class ServerController {
         rs.next();*/
         for (String pIdStr : lobby.getPlayerIdsArray()) {
             Player p = null;
+            System.out.println("pIdStr: " + pIdStr);
             for (Player p1 : players) {
-                if (p1.getId() == Integer.valueOf(pIdStr)) {
+                if (p1.getId() == Integer.parseInt(pIdStr)) {
                     p = p1;
                     break;
                 }
             }
-            if (p.getId() == Integer.valueOf(playerId))
+            if (p.getId() == Integer.parseInt(playerId))
                 p.setUpdateLobbySocket(updateLobbySocket);
             System.out.println("player id: " + p.getId());
             System.out.println("PLAYER'S GAME ID: " + p.getGameId());
             System.out.println("LOBBY ID: " + lobbyId);
-            if (p.getGameId() == Integer.valueOf(lobbyId)) {
+            if (p.getGameId() == Integer.parseInt(lobbyId)) {
                 System.out.println("player ıds: " + lobby.getPlayerIds());
                 System.out.println("PLAYER IP: " + p.getIp());
                 System.out.println("PLAYER PORT: " + p.getUpdateLobbySocket().getPort());
@@ -240,7 +243,7 @@ public class ServerController {
                     {
                         for (Player p1 : players)
                         {
-                            if (p1.getId() == Integer.valueOf(pId))
+                            if (p1.getId() == Integer.parseInt(pId))
                             {
                                 nicknames += p1.getNickname() + ",";
                                 break;
@@ -252,6 +255,27 @@ public class ServerController {
                     System.out.println("NICKNAMES SENT.");
                 } catch (IOException e) {
                     System.out.println("SOCKET OLMADI!");
+                    String playerIds = lobby.getPlayerIds();
+                    if (playerIds.contains(String.valueOf(p.getId())))
+                    {
+                        System.out.println("OLD PLAYER IDS: " + playerIds);
+                        int indexId = playerIds.indexOf(String.valueOf(p.getId()));
+                        System.out.println("INDEX: " + indexId);
+                        playerIds = playerIds.substring(0, indexId);
+                        if ((indexId + 10) < lobby.getPlayerIds().length())
+                            lobby.setPlayerIds(lobby.getPlayerIds().substring(indexId + 10));
+                        else
+                            lobby.setPlayerIds(playerIds.substring(0, playerIds.length() - 1));
+                        lobby.setNumOfPlayers(lobby.getNumOfPlayers() - 1);
+                        System.out.println("NUM OF PLAYERS: " + lobby.getNumOfPlayers());
+                        System.out.println("PLAYER " + p.getId() + " IS REMOVED.");
+                        System.out.println("NEW PLAYEYR IDS: " + lobby.getPlayerIds());
+                    }
+                    players.remove(p);
+                    if (p.getId() == lobby.getHostId() && lobby.getNumOfPlayers() > 0)
+                    {
+                        lobby.setHostId(Integer.parseInt(lobby.getPlayerIds().substring(0, 9)));
+                    }
                     e.printStackTrace();
                 }
             }

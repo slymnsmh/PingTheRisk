@@ -1,9 +1,7 @@
 package Controllers;
 
-import DatabaseRelatedClasses.Database;
 import Main.Main;
 import ServerClasses.Lobby;
-import ServerClasses.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,9 +16,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class NewGameSceneController implements Initializable
