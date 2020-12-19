@@ -40,22 +40,18 @@ public class LobbySceneController implements Initializable {
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
 
-        while (!isStop)
-        {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            refreshClicked();
-        }
-
-        /*Timer timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                if (!isStop)
+                    refreshClicked();
+                else {
+                    timer.cancel();
+                    timer.purge();
+                }
             }
-        }, 0, 5000);*/
+        }, 0, 5000);
         /*try {
             showHost();
         } catch (SQLException throwables) {
