@@ -168,7 +168,7 @@
          </font>
          <padding>
             <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
-         </padding></Button>
-      <Button fx:id="refresh_btn" layoutX="421.0" layoutY="482.0" mnemonicParsing="false" onAction="#refreshClicked" prefHeight="30.0" prefWidth="90.0" text="Refresh" />
+         </padding>
+      </Button>
 </children>
 </AnchorPane>

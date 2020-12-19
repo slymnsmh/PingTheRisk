@@ -216,8 +216,8 @@ public class ServerController {
                     break;
                 }
             }
-
-            p.setUpdateLobbySocket(updateLobbySocket);
+            if (p.getId() == Integer.parseInt(playerId))
+                p.setUpdateLobbySocket(updateLobbySocket);
             System.out.println("player id: " + p.getId());
             System.out.println("PLAYER'S GAME ID: " + p.getGameId());
             System.out.println("LOBBY ID: " + lobbyId);

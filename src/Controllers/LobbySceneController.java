@@ -44,7 +44,7 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refreshClicked();
+                refresh();
             }
         }, 0, 5000);
         /*try {
@@ -54,8 +54,7 @@ public class LobbySceneController implements Initializable {
         }*/
     }
 
-    @FXML
-    public void refreshClicked()
+    public void refresh()
     {
         try {
             socket = new Socket("18.185.120.197", 2641);
