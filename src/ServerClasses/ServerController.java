@@ -49,7 +49,7 @@ public class ServerController {
                     case "update_lobby":
                         updateLobby(in, out, inputStr, socket);
                         break;
-                    case "start_game":
+                    case "get_game_info":
                         String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
                         Lobby lobby = null;
                         for (Lobby l : lobbies)
@@ -57,9 +57,10 @@ public class ServerController {
                             if (l.getId() == Integer.parseInt(lobbyId))
                                 lobby = l;
                         }
-                        GameManager gameManager = new GameManager(socket, lobby);
+                        GameManager gameManager = new GameManager(socket, in, out, lobby);
                         break;
-                    case "get_game_info":
+                    case "start_game":
+                        startGame(socket, in, out, inputStr);
                         /*String playerId = inputStr.substring(0, inputStr.indexOf(":"));
                         String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
                         Lobby lobby = null;
@@ -300,6 +301,28 @@ public class ServerController {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public void startGame(Socket socket, DataInputStream in, DataOutputStream out, String inputStr) throws IOException {
+        String lobbyId = inputStr.substring(inputStr.indexOf(":")+1);
+        Lobby lobby = null;
+        for (Lobby l : lobbies)
+        {
+            if (l.getId() == Integer.parseInt(lobbyId))
+                lobby = l;
+        }
+        for (String playerId : lobby.getPlayerIdsArray())
+        {
+            Player player = null;
+            for (Player p : players)
+            {
+                if (p.getId() == Integer.parseInt(playerId))
+                    player = p;
+            }
+            Socket playerLobbySocket = player.getUpdateLobbySocket();
+            DataOutputStream output = new DataOutputStream(playerLobbySocket.getOutputStream());
+            output.writeUTF("+go_to_game_scene+");
         }
     }
 

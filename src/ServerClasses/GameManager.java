@@ -4,6 +4,8 @@ import DatabaseRelatedClasses.*;
 //import ServerClasses.Player;
 //import javafx.fxml.FXML;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -23,10 +25,14 @@ public class GameManager
     Socket socket;
     int hackerNumBeginning;
     int countryNumBeginning;
-    int[] givenCountries = new int[TOTAL_NUM_OF_COUNTRIES];
+    ArrayList<Integer> givenCountries = new ArrayList<>();
+    DataInputStream in;
+    DataOutputStream out;
 
-    public GameManager(Socket socket, Lobby lobby) throws SQLException {
+    public GameManager(Socket socket, DataInputStream in, DataOutputStream out, Lobby lobby) throws SQLException {
         this.socket = socket;
+        this.in = in;
+        this.out = out;
         this.lobby = lobby;
         playerNumber = lobby.getNumOfPlayers();
         this.playerIds = lobby.getPlayerIdsArray();
@@ -35,19 +41,33 @@ public class GameManager
         startGame();
     }
 
-    public GameManager( Lobby lobby, ArrayList<String> playerIds ) throws SQLException
+    /*public GameManager( Lobby lobby, ArrayList<String> playerIds ) throws SQLException
     {
         //map = new Map();
         this.lobby = lobby;
         this.playerIds = playerIds;
         startGame();
-    }
+    }*/
 
     public void startGame() throws SQLException
     {
         assignColorsToPlayers();
         assignHackerNumsToPlayers();
         assignCountriesToPlayers();
+        int counter = 0;
+        for (Player p : ServerController.players)
+        {
+            counter++;
+            System.out.println("PLAYER: " + counter);
+            System.out.println("ID: " + p.getId());
+            System.out.println("NICK: " + p.getNickname());
+            System.out.println("COLOR: " + p.getColor());
+            for (int i = 0; i < p.getCountries().size(); i++)
+                System.out.println("COUNTRY " + i + ": " + p.getCountries().get(i));
+            System.out.println("NUM OF COUNTRIES: " + p.getNumOfCountries());
+            System.out.println("NUM OF HACKERS: " + p.getNumOfHackers());
+        }
+        //out.writeUTF("");
     }
 
     public void assignColorsToPlayers() throws SQLException
@@ -97,6 +117,7 @@ public class GameManager
                     String playerId = playerIds.get(i);
                     ArrayList<Integer> countryNumbers = generateRandomCountryNumbers();
                     p.setCountries(countryNumbers);
+                    p.setNumOfCountries(countryNumBeginning);
 
                     String countryNumbersStr = "";
 
@@ -126,15 +147,15 @@ public class GameManager
                 if ( countryNumbers[i] == randomNumber )
                     isThere = true;
             }
-            for (int i = 0; i < givenCountries.length; i++)
+            for (int i = 0; i < givenCountries.size(); i++)
             {
-                if (givenCountries[i] == randomNumber)
+                if (givenCountries.get(i) == randomNumber)
                     isThere = true;
             }
             if ( !isThere )
             {
                 countryNumbers[counter] = randomNumber;
-                givenCountries[counter] = randomNumber;
+                givenCountries.add(randomNumber);
                 counter++;
             }
         }

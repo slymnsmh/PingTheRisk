@@ -59,6 +59,7 @@ public class LobbySceneController implements Initializable {
     @FXML
     public void refreshClicked()
     {
+        //Update Game
         try {
             socket = new Socket("18.185.120.197", 2641);
             System.out.println("Connected to the server");
@@ -71,8 +72,6 @@ public class LobbySceneController implements Initializable {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
         }
-        ////////////////////////
-
         String response = "";
         int playerNumber = 0;
         String playerNicknamesStr = "";
@@ -89,7 +88,21 @@ public class LobbySceneController implements Initializable {
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
-        System.out.println("ANAN1");
+        //Start Game
+        response = "";
+        try {
+            response = input.readUTF();
+            System.out.println("r1: " + response);
+            if (response.equals("+go_to_game_scene+")) {
+                playerNumber = Integer.valueOf(input.readUTF());
+                System.out.println("r2: " + playerNumber);
+                playerNicknamesStr += input.readUTF();
+                System.out.println("r3: " + playerNicknamesStr);
+                getNicknames(playerNumber, playerNicknamesStr);
+            }
+        } catch (IOException e) {
+            System.out.println("No answer from server. Trying again...");
+        }
     }
 
     @FXML
