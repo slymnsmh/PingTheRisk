@@ -322,7 +322,11 @@ public class ServerController {
             }
             Socket playerLobbySocket = player.getUpdateLobbySocket();
             DataOutputStream output = new DataOutputStream(playerLobbySocket.getOutputStream());
-            output.writeUTF("+go_to_game_scene+");
+            if (player.getId() != lobby.getHostId()) {
+                output.writeUTF("+go_to_game_scene+");
+            }
+            else
+                output.writeUTF("+go_to_game_scene_host+");
         }
     }
 

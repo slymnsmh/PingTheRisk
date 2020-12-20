@@ -57,15 +57,17 @@ public class GameManager
         int counter = 0;
         for (Player p : ServerController.players)
         {
-            counter++;
-            System.out.println("PLAYER: " + counter);
-            System.out.println("ID: " + p.getId());
-            System.out.println("NICK: " + p.getNickname());
-            System.out.println("COLOR: " + p.getColor());
-            for (int i = 0; i < p.getCountries().size(); i++)
-                System.out.println("COUNTRY " + i + ": " + p.getCountries().get(i));
-            System.out.println("NUM OF COUNTRIES: " + p.getNumOfCountries());
-            System.out.println("NUM OF HACKERS: " + p.getNumOfHackers());
+            if (lobby.getPlayerIds().contains(String.valueOf(p.getId()))) {
+                counter++;
+                System.out.println("PLAYER: " + counter);
+                System.out.println("ID: " + p.getId());
+                System.out.println("NICK: " + p.getNickname());
+                System.out.println("COLOR: " + p.getColor());
+                for (int i = 0; i < p.getCountries().size(); i++)
+                    System.out.println("COUNTRY " + i + ": " + p.getCountries().get(i));
+                System.out.println("NUM OF COUNTRIES: " + p.getNumOfCountries());
+                System.out.println("NUM OF HACKERS: " + p.getNumOfHackers());
+            }
         }
         //out.writeUTF("");
     }

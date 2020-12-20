@@ -41,6 +41,11 @@ public class LobbySceneController implements Initializable {
         playerId = LobbyScene.playerId; //123
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (fromWhere.equals("joined"))
             startGame_btn.setVisible(false);
@@ -65,7 +70,6 @@ public class LobbySceneController implements Initializable {
     {
         //Update Game
         try {
-            socket = new Socket("18.185.120.197", 2641);
             System.out.println("Connected to the server");
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             output = new DataOutputStream(socket.getOutputStream());
@@ -119,7 +123,9 @@ public class LobbySceneController implements Initializable {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
         }
-        GameScene gameScene = new GameScene();
+        if (input.readUTF().equals("+go_to_game_scene_host+")) {
+            GameScene gameScene = new GameScene();
+        }
     }
 
     public static void ifCreated() {
