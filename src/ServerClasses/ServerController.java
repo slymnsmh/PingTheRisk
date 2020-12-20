@@ -15,6 +15,8 @@ public class ServerController {
     public static ArrayList<Player> players = new ArrayList<Player>();
     public static ArrayList<Lobby> lobbies = new ArrayList<Lobby>();
     private ArrayList<Game> games = new ArrayList<Game>();
+    boolean canUpload = true;
+    HashMap<Socket, Boolean> requests = new HashMap<>();
 
     public ServerController(int port) {
         try {
@@ -24,6 +26,7 @@ public class ServerController {
             while (true)
             {
                 socket = server.accept();
+                requests.put(socket, false);
                 DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 System.out.println("--- Client" + counter + "accepted ---");
@@ -38,6 +41,19 @@ public class ServerController {
                 System.out.println("Command: " + command);
                 switch (command){
                     case "create_player":
+                        /*Timer timer = new Timer();
+                        timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                if (getLastSocket() == socket) {
+                                    try {
+                                        createPlayer(in, out, inputStr, socket);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }, 0, 1000);*/
                         createPlayer(in, out, inputStr, socket);
                         break;
                     case "join_game":
@@ -82,6 +98,21 @@ public class ServerController {
         }
     }
 
+    public Socket getLastSocket()
+    {
+        for (Map.Entry<Socket, Boolean> entry : requests.entrySet())
+        {
+            if (entry.getValue())
+            {
+                System.out.println("RETURN SOCKET: " + socket.getInetAddress().getHostAddress());
+                return entry.getKey();
+            }
+        }
+
+        System.out.println("!!!RETURN NULL!!!");
+        return null;
+    }
+
     public boolean createPlayer(DataInputStream in, DataOutputStream out, String inputStr, Socket createPlayerSocket) throws IOException {
         try {
             System.out.println("Inserting player \"" + inputStr + "\" to database...");
@@ -103,6 +134,7 @@ public class ServerController {
             out.writeUTF(String.valueOf(p.getId()));
             out.writeUTF("+ok+");
             System.out.println("Inserted player \"" + inputStr + "\" to database.");
+            requests.replace(socket, true);
             return true;
         } catch (SQLException i) {
             //socket.close();
@@ -158,7 +190,7 @@ public class ServerController {
             System.out.println(rs.getInt("num_of_players"));
             System.out.println("---------------------------");
             out.writeUTF("+ok+");
-
+            requests.replace(socket, true);
             return true;
         }
         else
@@ -201,6 +233,7 @@ public class ServerController {
             Database.stmt.executeUpdate(query);
             out.writeUTF(String.valueOf(lobby.getId()));
             out.writeUTF("+ok+");
+            requests.replace(socket, true);
             return true;
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
@@ -297,6 +330,7 @@ public class ServerController {
     }*/
 
     public void updateLobby(DataInputStream in, DataOutputStream out, String inputStr, Socket updateLobbySocket) throws IOException {
+        canUpload = false;
         String playerMethodStarterId = inputStr.substring(0, inputStr.indexOf(":"));
         String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
         for (Player p : players)
@@ -335,7 +369,13 @@ public class ServerController {
             out = new DataOutputStream(player.getUpdateLobbySocket().getOutputStream());
             out.writeUTF("+upload+");
             out.writeUTF(String.valueOf(lobby.getNumOfPlayers()));
-            out.writeUTF(lobby.getPlayerIds());
+            String playerNicknames = "";
+            for (Player p : players)
+            {
+                if (lobby.getPlayerIds().contains(String.valueOf(p.getId())))
+                    playerNicknames += p.getNickname() + ",";
+            }
+            out.writeUTF(playerNicknames);
             //}
         }
     }
@@ -358,11 +398,7 @@ public class ServerController {
             }
             Socket playerLobbySocket = player.getUpdateLobbySocket();
             DataOutputStream output = new DataOutputStream(playerLobbySocket.getOutputStream());
-            if (player.getId() != lobby.getHostId()) {
-                output.writeUTF("+go_to_game_scene+");
-            }
-            else
-                output.writeUTF("+go_to_game_scene_host+");
+            output.writeUTF("+go_to_game_scene+");
         }
     }
 

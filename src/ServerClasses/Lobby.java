@@ -40,7 +40,7 @@ public class Lobby
         String query = "SELECT * FROM lobby";
         Database.stmt = Database.conn.createStatement();
         ResultSet rs = Database.stmt.executeQuery(query);
-        int randomID = 100000000 + new Random().nextInt(999999999);
+        int randomID = 10000 + new Random().nextInt(89999);
         boolean isThere = false;
         while (rs.next())
         {

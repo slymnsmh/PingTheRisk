@@ -43,6 +43,8 @@ public class LobbySceneController implements Initializable {
         lobbyId_txt.setText(lobbyId);
         try {
             socket = new Socket("18.185.120.197", 2641);
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,6 +86,10 @@ public class LobbySceneController implements Initializable {
                 System.out.println("r3: " + playerNicknamesStr);
                 getNicknames(playerNumber, playerNicknamesStr);
             }
+            if (response.equals("+go_to_game_scene+"))
+            {
+                GameScene gameScene = new GameScene();
+            }
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
@@ -92,9 +98,6 @@ public class LobbySceneController implements Initializable {
     public void updateLobby()
     {
         try {
-            System.out.println("Connected to the server");
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
             String request = "update_lobby:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
@@ -125,19 +128,12 @@ public class LobbySceneController implements Initializable {
     @FXML
     public void startClicked() throws IOException {
         try {
-            socket = new Socket("18.185.120.197", 2641);
-            System.out.println("Connected to the server");
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
-        }
-        if (input.readUTF().equals("+go_to_game_scene_host+")) {
-            GameScene gameScene = new GameScene();
         }
     }
 
