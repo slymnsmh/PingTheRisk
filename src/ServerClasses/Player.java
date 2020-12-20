@@ -16,7 +16,7 @@ public class Player
     private String color;
     private int numOfHackers;
     private int numOfCountries;
-    private ArrayList<Country> countries;
+    private ArrayList<Integer> countries;
     private int numOfWins;
     private int numOfLosses;
     private int numOfBonusCards;
@@ -46,7 +46,7 @@ public class Player
         this.countries = null;
     }
 
-    public Player( int id, String ip, String port, int gameId, String nickname, String color, int numOfHackers, int numOfCountries, ArrayList<Country> countries, int numOfWins, int numOfLosses, int numOfBonusCards, int numOfBonusHackers, boolean isOnline )
+    public Player( int id, String ip, String port, int gameId, String nickname, String color, int numOfHackers, int numOfCountries, ArrayList<Integer> countries, int numOfWins, int numOfLosses, int numOfBonusCards, int numOfBonusHackers, boolean isOnline )
     {
         this.id = id;
         this.ip = ip;
@@ -215,12 +215,12 @@ public class Player
         this.numOfCountries = numOfRegions;
     }
 
-    public ArrayList<Country> getCountries()
+    public ArrayList<Integer> getCountries()
     {
         return countries;
     }
 
-    public void setCountries( ArrayList<Country> countries )
+    public void setCountries( ArrayList<Integer> countries )
     {
         this.countries = countries;
     }

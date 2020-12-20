@@ -200,6 +200,11 @@
                   <Image url="@../MapComponents/35/39o.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="img36" fitHeight="150.0" fitWidth="135.0" layoutX="610.0" layoutY="321.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../MapComponents/34/38g.png" />
+               </image>
+            </ImageView>
             <Label fx:id="num1_lbl" layoutX="184.0" layoutY="24.0" text="1" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -371,6 +376,11 @@
                </font>
             </Label>
             <Label fx:id="num35_lbl" layoutX="273.0" layoutY="119.0" text="35" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="num36_lbl" layoutX="663.0" layoutY="368.0" text="36" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

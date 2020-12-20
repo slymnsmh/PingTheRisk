@@ -12,8 +12,8 @@ import java.util.*;
 public class ServerController {
     private Socket socket = null;
     private ServerSocket server = null;
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Lobby> lobbies = new ArrayList<Lobby>();
+    public static ArrayList<Player> players = new ArrayList<Player>();
+    public static ArrayList<Lobby> lobbies = new ArrayList<Lobby>();
     private ArrayList<Game> games = new ArrayList<Game>();
 
     public ServerController(int port) {
@@ -49,8 +49,18 @@ public class ServerController {
                     case "update_lobby":
                         updateLobby(in, out, inputStr, socket);
                         break;
+                    case "start_game":
+                        String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
+                        Lobby lobby = null;
+                        for (Lobby l : lobbies)
+                        {
+                            if (l.getId() == Integer.parseInt(lobbyId))
+                                lobby = l;
+                        }
+                        GameManager gameManager = new GameManager(socket, lobby);
+                        break;
                     case "get_game_info":
-                        String playerId = inputStr.substring(0, inputStr.indexOf(":"));
+                        /*String playerId = inputStr.substring(0, inputStr.indexOf(":"));
                         String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
                         Lobby lobby = null;
                         for (Lobby l : lobbies)
@@ -59,7 +69,7 @@ public class ServerController {
                                 lobby = l;
                         }
                         GameManager gameManager = new GameManager(socket, players, lobby);
-                        break;
+                        break;*/
                 }
                 //socket.close();
             }

@@ -1,6 +1,7 @@
 package Main;
 
 import Scene.GameScene;
+import Scene.MainScene;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ public class Main extends Application
     public void start(Stage primaryStage) throws Exception
     {
         stage = primaryStage;
-        GameScene mainScene = new GameScene();
+        MainScene mainScene = new MainScene();
         stage.setTitle("Ping The Risk v1.0");
 
         //stage.setMaximized(true);

@@ -94,6 +94,18 @@ public class LobbySceneController implements Initializable {
 
     @FXML
     public void startClicked() throws IOException {
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+            System.out.println("Connected to the server");
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
+            String request = "start_game:" + playerId + ":" + lobbyId;
+            output.writeUTF(request);
+            System.out.println("RESPONSE SENT!!! : " + request);
+        } catch (Exception ex) {
+            System.out.println("There is a problem while connecting the server.");
+            System.out.println(ex);
+        }
         GameScene gameScene = new GameScene();
     }
 
