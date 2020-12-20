@@ -35,6 +35,7 @@ public class LobbySceneController implements Initializable {
     public static String playerId;
     public static String lobbyId;// = 456
     public static String fromWhere;
+    boolean gameStarted = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,6 +62,11 @@ public class LobbySceneController implements Initializable {
             @Override
             public void run() {
                 readResponse();
+                if (gameStarted)
+                {
+                    timer.cancel();
+                    timer.purge();
+                }
             }
         }, 0, 1000);
         /*try {
@@ -133,6 +139,7 @@ public class LobbySceneController implements Initializable {
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
+            gameStarted = true;
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
