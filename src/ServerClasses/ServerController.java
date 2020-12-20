@@ -331,9 +331,11 @@ public class ServerController {
             }
             /*if (player.getId() != Integer.parseInt(playerMethodStarterId))
             {*/
-                out.writeUTF("+upload+");
-                out.writeUTF(String.valueOf(lobby.getNumOfPlayers()));
-                out.writeUTF(lobby.getPlayerIds());
+            in = new DataInputStream(new BufferedInputStream(player.getUpdateLobbySocket().getInputStream()));
+            out = new DataOutputStream(player.getUpdateLobbySocket().getOutputStream());
+            out.writeUTF("+upload+");
+            out.writeUTF(String.valueOf(lobby.getNumOfPlayers()));
+            out.writeUTF(lobby.getPlayerIds());
             //}
         }
     }

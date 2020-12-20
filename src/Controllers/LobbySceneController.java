@@ -54,18 +54,39 @@ public class LobbySceneController implements Initializable {
         else
             startGame_btn.setVisible(true);
 
-        /*Timer timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refresh();
+                readResponse();
             }
-        }, 0, 5000);*/
+        }, 0, 1000);
         /*try {
             showHost();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }*/
+    }
+
+    public void readResponse()
+    {
+        String response = "";
+        int playerNumber = 0;
+        String playerNicknamesStr = "";
+        try {
+            response = input.readUTF();
+            System.out.println("r1: " + response);
+            if (response.equals("+upload+")) {
+                System.out.println("GELDİ LAN AMKKKK");
+                playerNumber = Integer.valueOf(input.readUTF());
+                System.out.println("r2: " + playerNumber);
+                playerNicknamesStr += input.readUTF();
+                System.out.println("r3: " + playerNicknamesStr);
+                getNicknames(playerNumber, playerNicknamesStr);
+            }
+        } catch (IOException e) {
+            System.out.println("No answer from server. Trying again...");
+        }
     }
 
     public void updateLobby()
@@ -81,22 +102,7 @@ public class LobbySceneController implements Initializable {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
         }
-        String response = "";
-        int playerNumber = 0;
-        String playerNicknamesStr = "";
-        try {
-            response = input.readUTF();
-            System.out.println("r1: " + response);
-            if (response.equals("+upload+")) {
-                playerNumber = Integer.valueOf(input.readUTF());
-                System.out.println("r2: " + playerNumber);
-                playerNicknamesStr += input.readUTF();
-                System.out.println("r3: " + playerNicknamesStr);
-                getNicknames(playerNumber, playerNicknamesStr);
-            }
-        } catch (IOException e) {
-            System.out.println("No answer from server. Trying again...");
-        }
+        readResponse();
     }
 
     /*public void refresh()
