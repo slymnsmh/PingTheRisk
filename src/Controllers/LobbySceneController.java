@@ -34,7 +34,7 @@ public class LobbySceneController implements Initializable {
     private ByteArrayInputStream inputByte = null;
     public static String playerId;
     public static String lobbyId;// = 456
-    boolean isStop = false;
+    public static String fromWhere;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,11 +42,16 @@ public class LobbySceneController implements Initializable {
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
 
+        if (fromWhere.equals("joined"))
+            startGame_btn.setVisible(false);
+        else
+            startGame_btn.setVisible(true);
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                refreshClicked();
+                refresh();
             }
         }, 0, 5000);
         /*try {
@@ -56,8 +61,7 @@ public class LobbySceneController implements Initializable {
         }*/
     }
 
-    @FXML
-    public void refreshClicked()
+    public void refresh()
     {
         //Update Game
         try {
@@ -123,10 +127,12 @@ public class LobbySceneController implements Initializable {
     }
 
     public static void ifCreated() {
+        fromWhere = "created";
         lobbyId = NewGameSceneController.lobbyId;
     }
 
     public static void ifJoined() {
+        fromWhere = "joined";
         lobbyId = JoinGameSceneController.lobbyId;
     }
 
