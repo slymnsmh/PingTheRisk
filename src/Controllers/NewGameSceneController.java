@@ -62,10 +62,8 @@ public class NewGameSceneController implements Initializable
             System.out.println(ex);
         }
         output.writeUTF(sendInfo);
-        System.out.println("ANANN");
         lobbyId = input.readUTF();
         if (input.readUTF().equals("+ok+")) {
-            System.out.println("ANANNNNNNNNN");
             LobbySceneController.ifCreated();
             LobbyScene lobbyScene = new LobbyScene(playerId, lobbyId);
         }

@@ -47,18 +47,20 @@ public class LobbySceneController implements Initializable {
             e.printStackTrace();
         }
 
+        updateLobby();
+
         if (fromWhere.equals("joined"))
             startGame_btn.setVisible(false);
         else
             startGame_btn.setVisible(true);
 
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 refresh();
             }
-        }, 0, 5000);
+        }, 0, 5000);*/
         /*try {
             showHost();
         } catch (SQLException throwables) {
@@ -66,9 +68,8 @@ public class LobbySceneController implements Initializable {
         }*/
     }
 
-    public void refresh()
+    public void updateLobby()
     {
-        //Update Game
         try {
             System.out.println("Connected to the server");
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -96,6 +97,12 @@ public class LobbySceneController implements Initializable {
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
+    }
+
+    /*public void refresh()
+    {
+        //Update Game
+
         //Start Game
         response = "";
         try {
@@ -107,7 +114,7 @@ public class LobbySceneController implements Initializable {
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
-    }
+    }*/
 
     @FXML
     public void startClicked() throws IOException {

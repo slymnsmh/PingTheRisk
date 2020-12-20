@@ -208,7 +208,7 @@ public class ServerController {
         }
     }
 
-    public void updateLobby(DataInputStream in, DataOutputStream out, String inputStr, Socket updateLobbySocket) throws SQLException {
+    /*public void updateLobby(DataInputStream in, DataOutputStream out, String inputStr, Socket updateLobbySocket) throws SQLException {
         int index = 0;
         while (inputStr.charAt(index) != ':')
             index++;
@@ -224,11 +224,6 @@ public class ServerController {
                 lobby = l;
             }
         }
-        /*String query = "SELECT * from lobby WHERE id='" + lobbyId + "'";
-        Database.connect();
-        Database.stmt = Database.conn.createStatement();
-        ResultSet rs = Database.stmt.executeQuery(query);
-        rs.next();*/
         for (String pIdStr : lobby.getPlayerIdsArray()) {
             Player p = null;
             System.out.println("pIdStr: " + pIdStr);
@@ -256,9 +251,6 @@ public class ServerController {
                     System.out.println("UPLOAD MESSAGE SENT.");
                     out.writeUTF(String.valueOf(lobby.getNumOfPlayers())); //player number
                     System.out.println("PLAYER NUMBER SENT.");
-                    /*String query = "SELECT * FROM player WHERE id = '" + p.getId() + "'";
-                    ResultSet rs = Database.stmt.executeQuery(query);
-                    rs.next();*/
                     System.out.println("PLAYER'S NICKNAME: " + p.getNickname());
                     String nicknames = "";
                     for (String pId : lobby.getPlayerIdsArray())
@@ -301,6 +293,48 @@ public class ServerController {
                     e.printStackTrace();
                 }
             }
+        }
+    }*/
+
+    public void updateLobby(DataInputStream in, DataOutputStream out, String inputStr, Socket updateLobbySocket) throws IOException {
+        String playerMethodStarterId = inputStr.substring(0, inputStr.indexOf(":"));
+        String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
+        for (Player p : players)
+        {
+            if (p.getId() == Integer.parseInt(playerMethodStarterId)) {
+                p.setUpdateLobbySocket(updateLobbySocket);
+                p.setIp(updateLobbySocket.getInetAddress().getHostAddress());
+                p.setPort(String.valueOf(updateLobbySocket.getPort()));
+                System.out.println("NICK: " + p.getNickname());
+                System.out.println("IP: " + p.getIp());
+                System.out.println("PORT: "+ p.getPort());
+            }
+        }
+        System.out.println("Updating player " + playerMethodStarterId + " to lobby " + lobbyId);
+        Lobby lobby = null;
+        for (Lobby l : lobbies)
+        {
+            if (l.getId() == Integer.parseInt(lobbyId))
+            {
+                lobby = l;
+            }
+        }
+        for (String playerIdStr : lobby.getPlayerIdsArray())
+        {
+            Player player = null;
+            for (Player p : players)
+            {
+                if (p.getId() == Integer.parseInt(playerIdStr))
+                {
+                    player = p;
+                }
+            }
+            /*if (player.getId() != Integer.parseInt(playerMethodStarterId))
+            {*/
+                out.writeUTF("+upload+");
+                out.writeUTF(String.valueOf(lobby.getNumOfPlayers()));
+                out.writeUTF(lobby.getPlayerIds());
+            //}
         }
     }
 
