@@ -79,7 +79,6 @@ public class LobbySceneController implements Initializable {
             response = input.readUTF();
             System.out.println("r1: " + response);
             if (response.equals("+upload+")) {
-                System.out.println("GELDİ LAN AMKKKK");
                 playerNumber = Integer.valueOf(input.readUTF());
                 System.out.println("r2: " + playerNumber);
                 playerNicknamesStr += input.readUTF();
@@ -128,6 +127,9 @@ public class LobbySceneController implements Initializable {
     @FXML
     public void startClicked() throws IOException {
         try {
+            socket = new Socket("18.185.120.197", 2641);
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);

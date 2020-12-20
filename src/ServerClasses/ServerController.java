@@ -25,35 +25,20 @@ public class ServerController {
             int counter = 1;
             while (true)
             {
+                System.out.println("AAA: " + counter);
                 socket = server.accept();
-                requests.put(socket, false);
+                //requests.put(socket, false);
                 DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 System.out.println("--- Client" + counter + "accepted ---");
                 counter++;
-                String command = in.readUTF();
-                int index = 0;
-                while (command.charAt(index) != ':')
-                    index++;
-                String inputStr = command.substring(index + 1, command.length());
-                System.out.println("Input: " + inputStr);
-                command = command.substring(0, index);
+                String wholeCommand = in.readUTF();
+                String command = wholeCommand.substring(0, wholeCommand.indexOf(":"));
+                String inputStr = wholeCommand.substring(wholeCommand.indexOf(":") + 1);
                 System.out.println("Command: " + command);
+                System.out.println("Input: " + inputStr);
                 switch (command){
                     case "create_player":
-                        /*Timer timer = new Timer();
-                        timer.scheduleAtFixedRate(new TimerTask() {
-                            @Override
-                            public void run() {
-                                if (getLastSocket() == socket) {
-                                    try {
-                                        createPlayer(in, out, inputStr, socket);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        }, 0, 1000);*/
                         createPlayer(in, out, inputStr, socket);
                         break;
                     case "join_game":
@@ -77,16 +62,7 @@ public class ServerController {
                         break;
                     case "start_game":
                         startGame(socket, in, out, inputStr);
-                        /*String playerId = inputStr.substring(0, inputStr.indexOf(":"));
-                        String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
-                        Lobby lobby = null;
-                        for (Lobby l : lobbies)
-                        {
-                            if (l.getId() == Integer.parseInt(lobbyId))
-                                lobby = l;
-                        }
-                        GameManager gameManager = new GameManager(socket, players, lobby);
-                        break;*/
+                        break;
                 }
                 //socket.close();
             }
@@ -381,6 +357,7 @@ public class ServerController {
     }
 
     public void startGame(Socket socket, DataInputStream in, DataOutputStream out, String inputStr) throws IOException {
+        System.out.println("START GAME RECEIVED");
         String lobbyId = inputStr.substring(inputStr.indexOf(":")+1);
         Lobby lobby = null;
         for (Lobby l : lobbies)
