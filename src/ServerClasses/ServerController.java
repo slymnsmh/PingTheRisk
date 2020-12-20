@@ -49,6 +49,17 @@ public class ServerController {
                     case "update_lobby":
                         updateLobby(in, out, inputStr, socket);
                         break;
+                    case "get_game_info":
+                        String playerId = inputStr.substring(0, inputStr.indexOf(":"));
+                        String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
+                        Lobby lobby = null;
+                        for (Lobby l : lobbies)
+                        {
+                            if (l.getId() == Integer.parseInt(lobbyId))
+                                lobby = l;
+                        }
+                        GameManager gameManager = new GameManager(socket, players, lobby);
+                        break;
                 }
                 //socket.close();
             }

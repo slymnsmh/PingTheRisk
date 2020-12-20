@@ -1,5 +1,6 @@
 package Controllers;
 
+import Scene.GameScene;
 import Scene.LobbyScene;
 import Scene.MainScene;
 import Scene.NewGameScene;
@@ -92,9 +93,8 @@ public class LobbySceneController implements Initializable {
     }
 
     @FXML
-    public void startClicked()
-    {
-        isStop = true;
+    public void startClicked() throws IOException {
+        GameScene gameScene = new GameScene();
     }
 
     public static void ifCreated() {

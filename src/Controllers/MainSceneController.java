@@ -10,7 +10,11 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
@@ -24,10 +28,12 @@ public class MainSceneController implements Initializable
     public static Socket socket = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
+    static AudioStream audios;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        this.music();
     }
 
     @FXML
@@ -89,6 +95,21 @@ public class MainSceneController implements Initializable
     private void exitClicked (ActionEvent e) throws Exception
     {
         System.exit(0);
+    }
+
+    public void music() {
+        try {
+            InputStream music = new FileInputStream(new File("src/Controllers/Solar.wav"));
+            audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+        } catch (Exception var3) {
+            JOptionPane.showMessageDialog((Component)null, "Error");
+        }
+
+    }
+
+    public static AudioStream getMusic() {
+        return audios;
     }
 
     /*private void changeScene(String filePath) throws IOException
