@@ -98,11 +98,7 @@ public class LobbySceneController implements Initializable {
             response = input.readUTF();
             System.out.println("r1: " + response);
             if (response.equals("+go_to_game_scene+")) {
-                playerNumber = Integer.valueOf(input.readUTF());
-                System.out.println("r2: " + playerNumber);
-                playerNicknamesStr += input.readUTF();
-                System.out.println("r3: " + playerNicknamesStr);
-                getNicknames(playerNumber, playerNicknamesStr);
+                GameScene gameScene = new GameScene();
             }
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
