@@ -6,6 +6,7 @@ import Scene.MainScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -24,6 +25,7 @@ public class LobbySceneController implements Initializable {
     @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
     @FXML private ImageView p1host_img;
+    @FXML private Label timer_lbl;
     @FXML private Text player1Nickname_txt, player2Nickname_txt, player3Nickname_txt, player4Nickname_txt;
     @FXML private GridPane players_grid;
     private Socket socket = null;
@@ -33,10 +35,10 @@ public class LobbySceneController implements Initializable {
     public static String playerId;
     public static String lobbyId;// = 456
     public static String fromWhere;
-    public static Timer timer;
+    public Timer timer;
     String response = "";
     public boolean isRead = false;
-    int renewCounter = 0;
+    int renewCounter = 30;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +64,7 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (renewCounter == 10)
+                if (renewCounter == 0)
                 {
                     timer.cancel();
                     timer.purge();
@@ -72,6 +74,11 @@ public class LobbySceneController implements Initializable {
                 }
             }
         }, 0, 1000);
+        try {
+            GameScene gameScene = new GameScene();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -87,7 +94,6 @@ public class LobbySceneController implements Initializable {
         String playerNicknamesStr = "";
         response = "";
         try {
-
             if (input.available() != 0) {
                 response = input.readUTF();
                 System.out.println("r1: " + response);
@@ -98,13 +104,16 @@ public class LobbySceneController implements Initializable {
                     System.out.println("r3: " + playerNicknamesStr);
                     getNicknames(playerNumber, playerNicknamesStr);
                 } else if (response.equals("+go_to_game_scene+")) {
-                    GameScene gameScene = new GameScene();
+                    renewCounter = 0;
+                    return;
                 }
-                renewCounter = 0;
+                renewCounter = 30;
                 //isRead = false;
             }
-            else
-                renewCounter++;
+            else {
+                //timer_lbl.setText(String.valueOf(renewCounter));
+                renewCounter--;
+            }
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
