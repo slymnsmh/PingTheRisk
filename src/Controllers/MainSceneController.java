@@ -1,6 +1,5 @@
 package Controllers;
 
-import ServerClasses.Player;
 import com.sun.glass.ui.ClipboardAssistance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

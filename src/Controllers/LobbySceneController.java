@@ -79,6 +79,7 @@ public class LobbySceneController implements Initializable {
         String playerNicknamesStr = "";
         response = "";
         try {
+
             if (isRead) {
                 response = input.readUTF();
                 System.out.println("r1: " + response);
@@ -89,8 +90,8 @@ public class LobbySceneController implements Initializable {
                     System.out.println("r3: " + playerNicknamesStr);
                     getNicknames(playerNumber, playerNicknamesStr);
                 } else if (response.equals("+go_to_game_scene+")) {
-                    timer.cancel();
-                    timer.purge();
+                    //timer.cancel();
+                    //timer.purge();
                     GameScene gameScene = new GameScene();
                 }
                 isRead = false;
@@ -109,8 +110,8 @@ public class LobbySceneController implements Initializable {
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             isRead = true;
-            readResponse();
             System.out.println("RESPONSE SENT!!! : " + request);
+            readResponse();
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);

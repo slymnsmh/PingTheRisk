@@ -122,87 +122,87 @@
             </ImageView>
             <ImageView fx:id="img20" fitHeight="150.0" fitWidth="115.0" layoutX="334.0" layoutY="184.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/20/23r.png" />
+                  <Image url="@../MapComponents/20/20r.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img21" fitHeight="150.0" fitWidth="50.0" layoutX="427.0" layoutY="239.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/21/24o.png" />
+                  <Image url="@../MapComponents/21/21o.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img22" fitHeight="150.0" fitWidth="70.0" layoutX="470.0" layoutY="227.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/22/25r.png" />
+                  <Image url="@../MapComponents/22/22r.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img23" fitHeight="150.0" fitWidth="90.0" layoutX="476.0" layoutY="200.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/23/26o.png" />
+                  <Image url="@../MapComponents/23/23o.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img24" fitHeight="150.0" fitWidth="80.0" layoutX="530.0" layoutY="241.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/24/27g.png" />
+                  <Image url="@../MapComponents/24/24g.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img25" fitHeight="150.0" fitWidth="60.0" layoutX="548.0" layoutY="220.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/25/28r.png" />
+                  <Image url="@../MapComponents/25/25r.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img26" fitHeight="150.0" fitWidth="70.0" layoutX="593.0" layoutY="207.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/26/29b.png" />
+                  <Image url="@../MapComponents/26/26b.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img27" fitHeight="150.0" fitWidth="65.0" layoutX="338.0" layoutY="256.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/27/30g.png" />
+                  <Image url="@../MapComponents/27/27g.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img28" fitHeight="150.0" fitWidth="76.0" layoutX="396.0" layoutY="255.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/28/31b.png" />
+                  <Image url="@../MapComponents/28/28b.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img29" fitHeight="150.0" fitWidth="90.0" layoutX="349.0" layoutY="287.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/29/33r.png" />
+                  <Image url="@../MapComponents/29/29r.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img30" fitHeight="150.0" fitWidth="80.0" layoutX="427.0" layoutY="283.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/30/34g.png" />
+                  <Image url="@../MapComponents/30/30g.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="img221" fitHeight="150.0" fitWidth="50.0" layoutX="520.0" layoutY="266.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="img31" fitHeight="150.0" fitWidth="50.0" layoutX="520.0" layoutY="266.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/31/35b.png" />
+                  <Image url="@../MapComponents/31/31b.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img32" fitHeight="150.0" fitWidth="50.0" layoutX="563.0" layoutY="279.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/32/36o.png" />
+                  <Image url="@../MapComponents/32/32o.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img33" fitHeight="150.0" fitWidth="70.0" layoutX="396.0" layoutY="326.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/33/37b.png" />
+                  <Image url="@../MapComponents/33/33b.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img34" fitHeight="150.0" fitWidth="135.0" layoutX="216.0" layoutY="-10.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/34/38g.png" />
+                  <Image url="@../MapComponents/34/34g.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img35" fitHeight="150.0" fitWidth="90.0" layoutX="251.0" layoutY="63.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/35/39o.png" />
+                  <Image url="@../MapComponents/35/35o.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img36" fitHeight="150.0" fitWidth="135.0" layoutX="610.0" layoutY="321.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/34/38g.png" />
+                  <Image url="@../MapComponents/36/36g.png" />
                </image>
             </ImageView>
             <Label fx:id="num1_lbl" layoutX="184.0" layoutY="24.0" text="1" textAlignment="CENTER" textFill="WHITE">

@@ -1,7 +1,6 @@
 package Controllers;
 
 import Main.Main;
-import ServerClasses.Lobby;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +19,6 @@ import java.util.ResourceBundle;
 
 public class NewGameSceneController implements Initializable
 {
-    public static Lobby lobby;
     @FXML private AnchorPane main_pane;
     @FXML private Button joinAGame_btn;
     @FXML private Button createAGame_btn;
