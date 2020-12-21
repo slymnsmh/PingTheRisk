@@ -55,6 +55,7 @@ public class GameSceneController implements Initializable
             e.printStackTrace();
         }
         updateScene();
+        p1Nick_lbl.setStyle("-fx-text-fill: black; -fx-background-color: white;");
     }
 
     public void updateScene()
@@ -112,17 +113,17 @@ public class GameSceneController implements Initializable
     }
 
     private void showNicknames() {
-        ArrayList<String> nicknamesArray = divideString(nicknames);
+        ArrayList<String> nicknamesArray = divideString(nicknames); //ssd,deniz
         if (Integer.parseInt(numOfPlayers) >= 1) {
             p1Nick_lbl.setText(nicknamesArray.get(0));
         }
-        else if (Integer.parseInt(numOfPlayers) >= 2){
+        if (Integer.parseInt(numOfPlayers) >= 2){
             p2Nick_lbl.setText(nicknamesArray.get(1));
         }
-        else if (Integer.parseInt(numOfPlayers) >= 3){
+        if (Integer.parseInt(numOfPlayers) >= 3){
             p3Nick_lbl.setText(nicknamesArray.get(2));
         }
-        else if (Integer.parseInt(numOfPlayers) >= 4){
+        if (Integer.parseInt(numOfPlayers) >= 4){
             p4Nick_lbl.setText(nicknamesArray.get(3));
         }
     }
@@ -192,6 +193,7 @@ public class GameSceneController implements Initializable
     {
         ImageView x = (ImageView)e.getSource();
         System.out.println(x.getId());
+        int countryIndex = Integer.parseInt(x.getId().substring(3));
     }
 
     @FXML

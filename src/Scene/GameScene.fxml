@@ -122,7 +122,7 @@
             </ImageView>
             <ImageView fx:id="img20" fitHeight="150.0" fitWidth="115.0" layoutX="334.0" layoutY="184.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/20/20r.png" />
+                  <Image url="@../MapComponents/20/20o.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img21" fitHeight="150.0" fitWidth="50.0" layoutX="427.0" layoutY="239.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
@@ -137,7 +137,7 @@
             </ImageView>
             <ImageView fx:id="img23" fitHeight="150.0" fitWidth="90.0" layoutX="476.0" layoutY="200.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../MapComponents/23/23o.png" />
+                  <Image url="@../MapComponents/23/23r.png" />
                </image>
             </ImageView>
             <ImageView fx:id="img24" fitHeight="150.0" fitWidth="80.0" layoutX="530.0" layoutY="241.0" onMouseClicked="#regionClicked" pickOnBounds="true" preserveRatio="true">
