@@ -38,7 +38,7 @@ public class LobbySceneController implements Initializable {
     public Timer timer;
     String response = "";
     public boolean isRead = false;
-    int renewCounter = 30;
+    public int renewCounter = 30;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,14 +64,15 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                /*
                 if (renewCounter == 0)
                 {
                     timer.cancel();
                     timer.purge();
                 }
-                else {
+                else {*/
                     readResponse();
-                }
+                //}
             }
         }, 0, 1000);
         try {
@@ -89,6 +90,16 @@ public class LobbySceneController implements Initializable {
 
     public void readResponse()
     {
+        if (renewCounter == 0)
+        {
+            timer.cancel();
+            try {
+                GameScene gameScene = new GameScene();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //timer.purge();
+        }
         System.out.println("AAANNNNANANANAN");
         int playerNumber = 0;
         String playerNicknamesStr = "";
@@ -129,6 +140,7 @@ public class LobbySceneController implements Initializable {
             output.writeUTF(request);
             //isRead = true;
             System.out.println("RESPONSE SENT!!! : " + request);
+            renewCounter = 0;
             readResponse();
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
