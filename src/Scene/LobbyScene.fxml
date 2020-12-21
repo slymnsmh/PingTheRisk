@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LobbySceneController">
 <children>
     <fx:include fx:id="commonUI" source="CommonUI.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <GridPane fx:id="players_grid" layoutX="684.0" layoutY="515.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="410.0" prefWidth="556.0" style="-fx-background-color: white; -fx-border-insets: color; -fx-alignment: center;" AnchorPane.bottomAnchor="154.60000000000002" AnchorPane.leftAnchor="684.0" AnchorPane.rightAnchor="680.0" AnchorPane.topAnchor="515.0">
@@ -184,6 +184,11 @@
       <Button fx:id="back_btn" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backClicked" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Back" textFill="WHITE" textOverrun="CLIP" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="27.0">
          <font>
             <Font name="System Bold" size="50.0" />
+         </font>
+      </Button>
+      <Button fx:id="refresh_btn" layoutX="862.0" layoutY="956.0" mnemonicParsing="false" onMouseClicked="#refreshClicked" prefHeight="56.0" prefWidth="200.0" text="REFRESH PAGE">
+         <font>
+            <Font size="24.0" />
          </font>
       </Button>
 </children>

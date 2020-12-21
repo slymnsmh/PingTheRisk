@@ -20,13 +20,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LobbySceneController implements Initializable {
-    @FXML Button startGame_btn;
+    @FXML Button startGame_btn, refresh_btn;
     @FXML ImageView p2Remove_img, p3Remove_img, p4Remove_img;
     @FXML private Text lobbyId_txt;
     @FXML private ImageView p1host_img;
     @FXML private Text player1Nickname_txt, player2Nickname_txt, player3Nickname_txt, player4Nickname_txt;
     @FXML private GridPane players_grid;
-    ResultSet rs;
     private Socket socket = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
@@ -34,9 +33,9 @@ public class LobbySceneController implements Initializable {
     public static String playerId;
     public static String lobbyId;// = 456
     public static String fromWhere;
-    boolean gameStarted = false;
     public static Timer timer;
     String response = "";
+    public boolean isRead = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,18 +57,19 @@ public class LobbySceneController implements Initializable {
         else
             startGame_btn.setVisible(true);
 
-        timer = new Timer();
+        /*timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 readResponse();
             }
-        }, 0, 1000);
+        }, 0, 1000);*/
+    }
+
+    @FXML
+    public void refreshClicked()
+    {
+        updateLobby();
     }
 
     public void readResponse()
@@ -79,20 +79,21 @@ public class LobbySceneController implements Initializable {
         String playerNicknamesStr = "";
         response = "";
         try {
-            response = input.readUTF();
-            System.out.println("r1: " + response);
-            if (response.equals("+upload+")) {
-                playerNumber = Integer.valueOf(input.readUTF());
-                System.out.println("r2: " + playerNumber);
-                playerNicknamesStr += input.readUTF();
-                System.out.println("r3: " + playerNicknamesStr);
-                getNicknames(playerNumber, playerNicknamesStr);
-            }
-            else if (response.equals("+go_to_game_scene+"))
-            {
-                timer.cancel();
-                timer.purge();
-                GameScene gameScene = new GameScene();
+            if (isRead) {
+                response = input.readUTF();
+                System.out.println("r1: " + response);
+                if (response.equals("+upload+")) {
+                    playerNumber = Integer.valueOf(input.readUTF());
+                    System.out.println("r2: " + playerNumber);
+                    playerNicknamesStr += input.readUTF();
+                    System.out.println("r3: " + playerNicknamesStr);
+                    getNicknames(playerNumber, playerNicknamesStr);
+                } else if (response.equals("+go_to_game_scene+")) {
+                    timer.cancel();
+                    timer.purge();
+                    GameScene gameScene = new GameScene();
+                }
+                isRead = false;
             }
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
@@ -107,6 +108,7 @@ public class LobbySceneController implements Initializable {
             output = new DataOutputStream(socket.getOutputStream());
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
+            isRead = true;
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
@@ -120,6 +122,7 @@ public class LobbySceneController implements Initializable {
             String request = "update_lobby:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
+            isRead = true;
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
