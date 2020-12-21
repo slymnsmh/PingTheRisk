@@ -57,19 +57,19 @@ public class LobbySceneController implements Initializable {
         else
             startGame_btn.setVisible(true);
 
-        /*timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 readResponse();
             }
-        }, 0, 1000);*/
+        }, 0, 1000);
     }
 
     @FXML
     public void refreshClicked()
     {
-        updateLobby();
+        //updateLobby();
     }
 
     public void readResponse()
@@ -80,7 +80,7 @@ public class LobbySceneController implements Initializable {
         response = "";
         try {
 
-            if (isRead) {
+            if (input.available() != 0) {
                 response = input.readUTF();
                 System.out.println("r1: " + response);
                 if (response.equals("+upload+")) {
