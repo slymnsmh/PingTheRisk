@@ -28,8 +28,8 @@ public class LobbySceneController implements Initializable {
     @FXML private GridPane players_grid;
     ResultSet rs;
     private Socket socket = null;
-    private BufferedReader input = null;
-    private BufferedWriter output = null;
+    private DataInputStream input = null;
+    private DataOutputStream output = null;
     private ByteArrayInputStream inputByte = null;
     public static String playerId;
     public static String lobbyId;// = 456
@@ -45,8 +45,8 @@ public class LobbySceneController implements Initializable {
         lobbyId_txt.setText(lobbyId);
         try {
             socket = new Socket("18.185.120.197", 2641);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,12 +79,12 @@ public class LobbySceneController implements Initializable {
         String playerNicknamesStr = "";
         response = "";
         try {
-            response = input.readLine();
+            response = input.readUTF();
             System.out.println("r1: " + response);
             if (response.equals("+upload+")) {
-                playerNumber = Integer.valueOf(input.readLine());
+                playerNumber = Integer.valueOf(input.readUTF());
                 System.out.println("r2: " + playerNumber);
-                playerNicknamesStr += input.readLine();
+                playerNicknamesStr += input.readUTF();
                 System.out.println("r3: " + playerNicknamesStr);
                 getNicknames(playerNumber, playerNicknamesStr);
             }
@@ -103,10 +103,10 @@ public class LobbySceneController implements Initializable {
     public void startClicked() throws IOException {
         try {
             socket = new Socket("18.185.120.197", 2641);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
             String request = "start_game:" + playerId + ":" + lobbyId;
-            output.write(request);
+            output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
@@ -118,7 +118,7 @@ public class LobbySceneController implements Initializable {
     {
         try {
             String request = "update_lobby:" + playerId + ":" + lobbyId;
-            output.write(request);
+            output.writeUTF(request);
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
