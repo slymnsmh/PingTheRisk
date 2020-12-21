@@ -36,6 +36,7 @@ public class LobbySceneController implements Initializable {
     public static Timer timer;
     String response = "";
     public boolean isRead = false;
+    int renewCounter = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,7 +62,14 @@ public class LobbySceneController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                readResponse();
+                if (renewCounter == 10)
+                {
+                    timer.cancel();
+                    timer.purge();
+                }
+                else {
+                    readResponse();
+                }
             }
         }, 0, 1000);
     }
@@ -90,12 +98,13 @@ public class LobbySceneController implements Initializable {
                     System.out.println("r3: " + playerNicknamesStr);
                     getNicknames(playerNumber, playerNicknamesStr);
                 } else if (response.equals("+go_to_game_scene+")) {
-                    //timer.cancel();
-                    //timer.purge();
                     GameScene gameScene = new GameScene();
                 }
-                isRead = false;
+                renewCounter = 0;
+                //isRead = false;
             }
+            else
+                renewCounter++;
         } catch (IOException e) {
             System.out.println("No answer from server. Trying again...");
         }
@@ -109,7 +118,7 @@ public class LobbySceneController implements Initializable {
             output = new DataOutputStream(socket.getOutputStream());
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
-            isRead = true;
+            //isRead = true;
             System.out.println("RESPONSE SENT!!! : " + request);
             readResponse();
         } catch (Exception ex) {
