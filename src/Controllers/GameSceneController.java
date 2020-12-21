@@ -44,17 +44,20 @@ public class GameSceneController implements Initializable
         {
             map_pane.getChildren().get(i).setPickOnBounds(false);
         }
-        String sendInfo = "get_game_info:" + playerId + ":" +lobbyId;
+        /*String sendInfo = "get_game_info:" + playerId + ":" +lobbyId;
         try {
             socket = new Socket("18.185.120.197", 2641);
             System.out.println("Connected to the server");
             input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            System.out.println("abc");
             output = new DataOutputStream(socket.getOutputStream());
+            System.out.println("def");
             output.writeUTF(sendInfo);
+            System.out.println("jkl");
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
             System.out.println(ex);
-        }
+        }*/
     }
 
     @FXML

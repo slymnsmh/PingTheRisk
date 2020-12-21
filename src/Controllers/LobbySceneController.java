@@ -3,7 +3,6 @@ package Controllers;
 import Scene.GameScene;
 import Scene.LobbyScene;
 import Scene.MainScene;
-import Scene.NewGameScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,23 +28,25 @@ public class LobbySceneController implements Initializable {
     @FXML private GridPane players_grid;
     ResultSet rs;
     private Socket socket = null;
-    private DataInputStream input = null;
-    private DataOutputStream output = null;
+    private BufferedReader input = null;
+    private BufferedWriter output = null;
     private ByteArrayInputStream inputByte = null;
     public static String playerId;
     public static String lobbyId;// = 456
     public static String fromWhere;
     boolean gameStarted = false;
+    public static Timer timer;
+    String response = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        playerId = LobbyScene.playerId; //123
+        playerId = LobbyScene.playerId;
         players_grid.setGridLinesVisible(true);
         lobbyId_txt.setText(lobbyId);
         try {
             socket = new Socket("18.185.120.197", 2641);
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,42 +58,40 @@ public class LobbySceneController implements Initializable {
         else
             startGame_btn.setVisible(true);
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                readResponse();
-                if (gameStarted)
-                {
-                    timer.cancel();
-                    timer.purge();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                readResponse();
             }
         }, 0, 1000);
-        /*try {
-            showHost();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }*/
     }
 
     public void readResponse()
     {
-        String response = "";
+        System.out.println("AAANNNNANANANAN");
         int playerNumber = 0;
         String playerNicknamesStr = "";
+        response = "";
         try {
-            response = input.readUTF();
+            response = input.readLine();
             System.out.println("r1: " + response);
             if (response.equals("+upload+")) {
-                playerNumber = Integer.valueOf(input.readUTF());
+                playerNumber = Integer.valueOf(input.readLine());
                 System.out.println("r2: " + playerNumber);
-                playerNicknamesStr += input.readUTF();
+                playerNicknamesStr += input.readLine();
                 System.out.println("r3: " + playerNicknamesStr);
                 getNicknames(playerNumber, playerNicknamesStr);
             }
-            if (response.equals("+go_to_game_scene+"))
+            else if (response.equals("+go_to_game_scene+"))
             {
+                timer.cancel();
+                timer.purge();
                 GameScene gameScene = new GameScene();
             }
         } catch (IOException e) {
@@ -100,11 +99,26 @@ public class LobbySceneController implements Initializable {
         }
     }
 
+    @FXML
+    public void startClicked() throws IOException {
+        try {
+            socket = new Socket("18.185.120.197", 2641);
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            String request = "start_game:" + playerId + ":" + lobbyId;
+            output.write(request);
+            System.out.println("RESPONSE SENT!!! : " + request);
+        } catch (Exception ex) {
+            System.out.println("There is a problem while connecting the server.");
+            System.out.println(ex);
+        }
+    }
+
     public void updateLobby()
     {
         try {
             String request = "update_lobby:" + playerId + ":" + lobbyId;
-            output.writeUTF(request);
+            output.write(request);
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
@@ -129,22 +143,6 @@ public class LobbySceneController implements Initializable {
             System.out.println("No answer from server. Trying again...");
         }
     }*/
-
-    @FXML
-    public void startClicked() throws IOException {
-        try {
-            socket = new Socket("18.185.120.197", 2641);
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            output = new DataOutputStream(socket.getOutputStream());
-            String request = "start_game:" + playerId + ":" + lobbyId;
-            output.writeUTF(request);
-            System.out.println("RESPONSE SENT!!! : " + request);
-            gameStarted = true;
-        } catch (Exception ex) {
-            System.out.println("There is a problem while connecting the server.");
-            System.out.println(ex);
-        }
-    }
 
     public static void ifCreated() {
         fromWhere = "created";

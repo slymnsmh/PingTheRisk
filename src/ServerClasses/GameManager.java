@@ -38,6 +38,7 @@ public class GameManager
         this.playerIds = lobby.getPlayerIdsArray();
         hackerNumBeginning = TOTAL_NUM_OF_HACKERS / playerNumber;
         countryNumBeginning = TOTAL_NUM_OF_COUNTRIES / playerNumber;
+        System.out.println("I CAMED HERE");
         startGame();
     }
 

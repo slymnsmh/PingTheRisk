@@ -52,6 +52,7 @@ public class ServerController {
                         break;
                     case "get_game_info":
                         String lobbyId = inputStr.substring(inputStr.indexOf(":") + 1);
+                        System.out.println("GET GAME INFO RECEIVED");
                         Lobby lobby = null;
                         for (Lobby l : lobbies)
                         {
