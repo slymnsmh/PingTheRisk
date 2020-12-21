@@ -109,6 +109,7 @@ public class LobbySceneController implements Initializable {
             String request = "start_game:" + playerId + ":" + lobbyId;
             output.writeUTF(request);
             isRead = true;
+            readResponse();
             System.out.println("RESPONSE SENT!!! : " + request);
         } catch (Exception ex) {
             System.out.println("There is a problem while connecting the server.");
